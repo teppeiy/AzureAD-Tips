@@ -1,7 +1,7 @@
-# Azure AD 利用のTipsを日本語でお届けします
+# Azure AD KB
 
-### * [ユーザーID入力をスキップしたい](HRD-Acceleration.md)
+### [ユーザーID入力をスキップしたい](HRD-Acceleration.md)
 
-### * [ADFS廃止のすすめ](Goodbye-ADFS.md)
+### [ADFS廃止のすすめ](Goodbye-ADFS.md)
 
-### * [Azure AD認証基盤の要塞化](Secure-AzureAD.md)
+### [Azure AD・認証基盤のセキュリティ対策](Secure-AzureAD.md)

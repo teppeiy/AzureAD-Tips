@@ -1,27 +1,26 @@
 # ユーザーID入力をスキップしたい
 
 ## シナリオ
-ADFSとフェデレーション環境において、SP Initiated SSOフローの際、Azure ADにUPNを入力する必要がある。Azure ADがユーザーのテナントを特定し、ADFSへリダイレクトをするためで、これをホームレルムディスカバリー（HRD）と呼ぶ。
-ユーザーがUPNを入力する手間を省くためには3つの方法がある。
+ADFSとフェデレーション環境において、SP Initiated SSOフローの際、Azure ADにUPNを入力する必要があります。Azure ADがユーザーのテナントを特定し、ADFSへリダイレクトをするためで、これをホームレルムディスカバリー（HRD）と呼びます。
+ユーザーがUPNを入力する手間を省くためには3つの方法があります。
 
 ## ソリューション
 ### 1. アプリで対応
-こちらに詳しく書かれていますのでご参考ください。
-https://blogs.msdn.microsoft.com/tsmatsuz/2015/04/20/azure-ad-custom-branding-login-ui-home-realm-discovery-domain-hint/
+[こちらのブログ](https://blogs.msdn.microsoft.com/tsmatsuz/2015/04/20/azure-ad-custom-branding-login-ui-home-realm-discovery-domain-hint/)をご参考ください。  
 
 ### 2. SPに指定するIdPのURLにレルム情報を指定する（SAMLのみ）
-1に似ているのですが、SAMLに限ってSPの設定で指定するIdP（Azure ADのSAMLエンドポイント）にWHRパラメータを追記することでADFSまでリダイレクトされます。
+1に似ているのですが、SAMLに限ってSPの設定で指定するIdP（Azure ADのSAMLエンドポイント）にWHRパラメータ(whr=yourfederateddomain.com)を追記することでADFSへリダイレクトされます。  
+```XML
 https://login.microsoftonline.com/23fbfc88-a7d3-49b0-9e68-3d6922aa9ac6/saml2?whr=contoso.com
-
+```
 ### 3. Azure ADのServicePrincipalにHRDアクセラレーションポリシーを適用する
-[こちら](https://support.office.com/ja-jp/article/%E8%87%AA%E5%8B%95%E3%82%A2%E3%82%AF%E3%82%BB%E3%83%A9%E3%83%AC%E3%83%BC%E3%82%BF-%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6-Yammer-%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B-Office-365-%E3%82%B5%E3%82%A4%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%92%E6%94%B9%E5%96%84%E3%81%99%E3%82%8B-4d0e5067-992c-4cd6-bad5-b4ac0d52f596?ui=ja-JP&rs=ja-JP&ad=JP)はYammerでの例ですが、汎用的に利用可能です。
+[こちら](https://support.office.com/ja-jp/article/%E8%87%AA%E5%8B%95%E3%82%A2%E3%82%AF%E3%82%BB%E3%83%A9%E3%83%AC%E3%83%BC%E3%82%BF-%E3%83%9D%E3%83%AA%E3%82%B7%E3%83%BC%E3%82%92%E4%BD%BF%E7%94%A8%E3%81%97%E3%81%A6-Yammer-%E3%81%AB%E5%AF%BE%E3%81%99%E3%82%8B-Office-365-%E3%82%B5%E3%82%A4%E3%83%B3%E3%82%A4%E3%83%B3%E3%82%92%E6%94%B9%E5%96%84%E3%81%99%E3%82%8B-4d0e5067-992c-4cd6-bad5-b4ac0d52f596?ui=ja-JP&rs=ja-JP&ad=JP)はYammerでの例ですが、汎用的に利用可能です。[サンプルスクリプト](#HRDアクセラレーションポリシー適用のPowerShellサンプル)も参考ください。
+
+#### 2. 3. の注意点
+アプリのサインオンURLに移動後、問答無用でADFSにリダイレクトされるため、対象アプリにクラウドIDの利用者や、B2Bユーザー、また、別なADFSでログインするユーザーが居る場合にはこの手法は利用することが不可です。
 
 
-### 2. 3. の注意点
-アプリのサインオンURLに移動後、問答無用でADFSにリダイレクトされるため、対象アプリにクラウドIDの利用者や、B2Bユーザー、また、別なADFSでログインするユーザーが居る場合にはこの手法は利用することが不可。
-
-
-### HRDアクセラレーションポリシー（3）のサンプルPowerShellスクリプト
+### HRDアクセラレーションポリシー適用のPowerShellサンプル
 ```PowerShell
 # 必要に応じて
 # Azure AD Previewモジュールのインストール・インポート（PowerShellを管理者権限で実行）
