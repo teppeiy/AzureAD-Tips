@@ -20,7 +20,7 @@ https://myapps.microsoft.com/contoso.com
 もしアプリケーションが対応している、もしくは改変で対応が可能であれば、同様にURLパラメータ等でHRDアクセラレーションが可能です。詳しくは、[こちらのブログ](https://blogs.msdn.microsoft.com/tsmatsuz/2015/04/20/azure-ad-custom-branding-login-ui-home-realm-discovery-domain-hint/)をご参考ください。  
   
 
-### 2. SPに指定するIdPのURLにレルム情報を指定する（SAMLのみ）
+### 2. SPに指定するIdPのURLにレルム情報を指定する (SAML-P)
 1に似ているのですが、SAMLに限ってSPの設定で指定するIdP（Azure ADのSAMLエンドポイント）にWHRパラメータ(whr=contoso.com)を追記することで、対象のAzure ADテナントへリダイレクトされます。  
 ```XML
 https://login.microsoftonline.com/23fbfc88-a7d3-49b0-9e68-3d6922aa9ac6/saml2?whr=contoso.com
