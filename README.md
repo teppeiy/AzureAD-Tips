@@ -6,3 +6,4 @@
 
 ### [ADFS廃止のすすめ](Goodbye-ADFS.md)
 
+### [なぜADFSよりもAzureADをIdPとすべきか](Why-AzureAD.md)
