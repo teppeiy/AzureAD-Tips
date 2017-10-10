@@ -7,3 +7,5 @@
 ### [ADFS廃止のすすめ](Goodbye-ADFS.md)
 
 ### [なぜADFSよりもAzureADをIdPとすべきか](Why-AzureAD.md)
+
+### [PowerShell環境のセットアップ](Powershell-Setup.md)
