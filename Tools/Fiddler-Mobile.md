@@ -1,4 +1,4 @@
-# FiddlerでiOS/Androidの通信を確認する
+# FiddlerでiOS/AndroidのHTTP/Sトレースを取得する
 
 ## iOS
 https://qiita.com/dolls/items/6ad469c271f88a95a6f9  
