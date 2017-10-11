@@ -44,11 +44,11 @@ https://myignite.microsoft.com/sessions/53404?source=sessions
 ### ADFSに依存しているサービスを移行
 #### 移行要件の確認
 移行難易度・可否を判断する上での考慮ポイント
-* ADFS Configuration Analyzerによる移行判断レポート
+* [ADFS Config Dump](ADFS-Config-Dump.md)による移行判断レポート
 * ライセンス
 * ADFSでしか実現することができない要件の確認
-ADFS Configuration Analyzerによる移行判断レポート
-Azure AD開発部門で開発したADFS Configuration Analyzerにより取得したADFSの設定情報から、Relying Party（証明書利用者信頼）の移行判定レポートを提供します。
+[ADFS Config Dump](ADFS-Config-Dump.md)による移行判断レポート
+Azure AD開発部門で開発した[ADFS Config Dump](ADFS-Config-Dump.md)により取得したADFSの設定情報から、Relying Party（証明書利用者信頼）の移行判定レポートを提供します。
 
 #### よくある移行障壁について
 1. EncryptClaims
