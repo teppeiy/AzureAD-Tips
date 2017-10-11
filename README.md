@@ -12,7 +12,13 @@
 
 # ユーザーエクスペリエンス
 ### [ユーザーID (UPN) 入力を省きたい](UX/HRD-Acceleration.md)
+### [ChromeやFirefoxでも統合Windows認証したい](UX/ADFS-IWA.md)
+### [ADFSのログイン画面にSSPRへのリンクを表示](UX/ADFS-SSPR-Link.md)
+
+# SSO
+### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
 
 # ツール・その他
 ### [PowerShell環境のセットアップ](Tools/Powershell-Setup.md)
 ### [FiddlerでiOS/AndroidのHTTP/Sトレースを取得する](Tools/Fiddler-Mobile.md)
+### [SSOのデバッグ](SSO-Debug.md)
