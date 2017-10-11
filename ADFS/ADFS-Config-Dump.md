@@ -1,8 +1,9 @@
 # ADFS Config Dump
 
-ADFS上で以下のPowerShellを実行し、結果をお送りください。
+ADFS上で以下のPowerShellを実行すると、Relying Party（証明書利用者信頼）の構成情報がデスクトップに出力されます。
 
 ### PowerShell Version 5 以上が利用可能な場合
+[スクリプトのダウンロード](ExportADFSApps.ps1)
 ```PowerShell
 #Requires -Version 5
 
@@ -68,6 +69,8 @@ Function Remove-InvalidFileNameChars
 
 ### PowerShell Version 5 未満の場合
 Compress-Archiveが利用不可  
+ 
+[スクリプトのダウンロード](ExportADFSApps_v4.ps1)
 ```PowerShell
 # For PowerShell version below 5
 
@@ -128,4 +131,4 @@ Function Remove-InvalidFileNameChars
 
     #Compress-Archive -Path $filePathBase -DestinationPath $zipfileName
     invoke-item  $filePathBase
-    ```
+```
