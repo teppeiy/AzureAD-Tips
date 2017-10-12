@@ -6,14 +6,14 @@
 ### [ADFS廃止のすすめ](ADFS/Goodbye-ADFS.md)
 ### [ADFS Config Dump](ADFS/ADFS-Config-Dump.md)
 
-# 多要素認証  
+# 多要素認証 (MFA)  
 ### [MFAのベストプラクティス](MFA/MFA-Best-Practice.md)
-### [MFAをリセットを委譲する](MFA/Delegate-MFA-Reset.md)
+### [MFAのリセット作業をヘルプデスク委譲する](MFA/Delegate-MFA-Reset.md)
 
 # ユーザーエクスペリエンス
 ### [ユーザーID (UPN) 入力を省きたい](UX/HRD-Acceleration.md)
-### [ChromeやFirefoxでも統合Windows認証したい](UX/ADFS-IWA.md)
-### [ADFSのログイン画面にSSPRへのリンクを表示](UX/ADFS-SSPR-Link.md)
+### [ChromeやFirefoxでも統合Windows認証したい (ADFS利用の場合)](UX/ADFS-IWA.md)
+### [ADFSのログイン画面にSSPRへのリンクを表示  (ADFS利用の場合)](UX/ADFS-SSPR-Link.md)
 
 # SSO
 ### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
