@@ -37,15 +37,20 @@ WIP
 パスワードハッシュと言えども、Azure ADに同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
 
 #### パスワードハッシュ同期のメカニズム
-オンプレミスActive Directoryには、MD4でハッシュ化されたパスワードが保存されています。パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルトやストレッチングといったテクニックを使い、攻撃リスクを極限まで抑えるプロセスを経てAzure ADへ同期します。
+パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルト+ストレッチング+ハッシュといったテクニックを使い、攻撃リスクを軽減する対策を経てAzure ADへ同期します。
 * ソルト: ハッシュ化前に対象文字列にランダムな文字列を不可する。レインボーテーブルによる探索に対する防御策の一つ
 * ストレッチング: 何度もハッシュ化をすることにより、攻撃者の解析コストを高める（時間の長期化）防御策の一つ
+
+
+    参考：
+    [ハッシュとソルト、ストレッチングを正しく理解する：本当は怖いパスワードの話](http://www.atmarkit.co.jp/ait/articles/1110/06/news154.html)
+
 
 具体的には、ADに保存されているMD4でハッシュ化されたパスワードにsaltを付加、[PBKDF2](https://www.ietf.org/rfc/rfc2898.txt)関数で計算後、[HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx)
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
 #### [Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)
-Azure ADの基本機能である[Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、そのユーザー アカウントをロックします。 Azure AD は、特定のログイン セッションについてのリスクを判別できるように設計されています。 サイバー脅威を止めるために、最新のセキュリティ データを利用してロックアウト セマンティクスを適用します。
+Azure ADの基本機能である[Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、大量のパスワードを試行等への防御策です。ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、そのユーザー アカウントをロックします。 Azure AD は、特定のログイン セッションについてのリスクを判別できるように設計されています。 サイバー脅威を止めるために、最新のセキュリティ データを利用してロックアウト セマンティクスを適用します。
 
 ### 手順
 1. [Azure AD Connectの構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
