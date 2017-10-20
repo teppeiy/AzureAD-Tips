@@ -64,15 +64,15 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 1. [Azure AD Connectの構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
 2. [リスクのフラグ付きユーザーのレポートを確認する](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-reporting-security-user-at-risk)
 
+### 自動対処
+[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用すると、漏洩したアカウントを検出すると、次回ログイン時にMFAやパスワード変更を強制することが可能です。[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用するにはAzure AD Premium P2ライセンスが必要になります。
+
 ### パスワードハッシュ同期をすることによるその他のメリット  
 #### 1. ディザスタリカバリへの対策  
 フェデレーション環境において、AD FS/WAPが利用できなくなった際には、Office 365等Azure ADに認証を依存しているサービスへのログインが利用できなくなります。実際にAD FSがPetya等のランサムウェアに感染した企業において、パスワードハッシュ同期をしていた企業はAD FSからAzure ADへの認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FSを構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 #### 2. 近い将来AD FSを廃止することへの準備  
 これまで多くのケースでAD FSが必要でしたが、昨今のAzure ADの急速な進化により、AD FSが無くとも多くの要件が満たせるようになってきました。その例として、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用することにより、アクセス元IPアドレスに基づいたアクセス許可・拒否が可能になってきています。また、[シームレスシングルサインオン(SeamlessSSO)](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnect-sso)を利用することで、シングルサインオンも実現可能になりました。  
 AD FSの廃止については、[こちら](Goodbye-ADFS.md)も参照ください。
-
-### 自動対処
-[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用すると、漏洩したアカウントを検出すると、次回ログイン時にMFAやパスワード変更を強制することが可能です。[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用するにはAzure AD Premium P2ライセンスが必要になります。
 
 ## パスワードポシリーの強化
 * ### [動的な禁止パスワードポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
