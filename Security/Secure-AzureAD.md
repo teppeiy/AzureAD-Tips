@@ -9,7 +9,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     * Just-In-Time権限昇格機能(PIM)の有効化
 * [リスクのフラグ付きユーザーのレポートの有効化](#リスクのフラグ付きユーザーのレポートの有効化)
 * [パスワードポシリーの強化](#パスワードポシリーの強化)
-* [AD FSの保護](#AD FSの保護)
+* [AD FSの保護](#ad-fsの保護)
     * AD FS Extranet Lockout Protection の有効化
     * Azure AD Connect Health for AD FS の有効化
     * AD FSのプライマリ認証にワンタイムパスコードを利用する (オプション)
@@ -27,8 +27,10 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     更に強固な保護には、専用マシンからのみのアクセスを許可するよう実装をしてください。[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)や、AD FSのIPアドレス制限、証明書認証等を利用することで実装します。
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
 
-[](#### Breaking Glass シナリオ\
-WIP)
+<!--
+#### Breaking Glass シナリオ
+WIP
+-->
 
 ## [リスクのフラグ付きユーザーのレポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関するレポートを提供しています。  
@@ -56,7 +58,7 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 既定のロックアウトしきい値は試行失敗 10 回で、既定のロックアウト期間は 60 秒です。
 また、スマート ロックアウトは正規のユーザーによるサインインと攻撃者によるサインインを区別し、ほとんどの場合は攻撃者のみをロックアウトします。 この機能は、攻撃者の悪意によって正規のユーザーがロックアウトされるのを防ぎます。 正規のユーザーと攻撃者を区別するには、過去のサインイン動作、ユーザーのデバイスとブラウザー、その他のシグナルが使われます。 アルゴリズムは常に改善されています。
 
-フェデレーション環境においては、同様な防御策をAD FS等で行う必要がありますが、それについては[AD FSの保護](#AD FSの保護)をご覧ください。
+フェデレーション環境においては、同様な防御策をAD FS等で行う必要がありますが、それについては [AD FSの保護](#ad-fsの保護) をご覧ください。
 
 ### 手順
 1. [Azure AD Connectの構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
@@ -67,7 +69,10 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 フェデレーション環境において、AD FS/WAPが利用できなくなった際には、Office 365等Azure ADに認証を依存しているサービスへのログインが利用できなくなります。実際にAD FSがPetya等のランサムウェアに感染した企業において、パスワードハッシュ同期をしていた企業はAD FSからAzure ADへの認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FSを構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 #### 2. 近い将来AD FSを廃止することへの準備  
 これまで多くのケースでAD FSが必要でしたが、昨今のAzure ADの急速な進化により、AD FSが無くとも多くの要件が満たせるようになってきました。その例として、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用することにより、アクセス元IPアドレスに基づいたアクセス許可・拒否が可能になってきています。また、[シームレスシングルサインオン(SeamlessSSO)](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnect-sso)を利用することで、シングルサインオンも実現可能になりました。  
-AD FSの廃止については、[こちら](Goodbye-AD FS.md)も参照ください。
+AD FSの廃止については、[こちら](Goodbye-ADFS.md)も参照ください。
+
+### 自動対処
+[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用すると、漏洩したアカウントを検出すると、次回ログイン時にMFAやパスワード変更を強制することが可能です。[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用するにはAzure AD Premium P2ライセンスが必要になります。
 
 ## パスワードポシリーの強化
 * ### [動的な禁止パスワードポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
@@ -78,7 +83,7 @@ AD FSの廃止については、[こちら](Goodbye-AD FS.md)も参照くださ�
     AD FS利用の場合、この機能を有効化することにより、AD FSへのブルートフォース攻撃等への対策になります。  
 
 * ### [Azure AD Connect Health for AD FS](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health) の有効化  
-    この機能を有効化することで、無効なユーザー名とパスワードによる試行を行った上位 50 人のユーザーと直近の IP アドレスなど、AD FS に関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health-AD FS)を作成することができます。
+    この機能を有効化することで、無効なユーザー名とパスワードによる試行を行った上位 50 人のユーザーと直近の IP アドレスなど、AD FS に関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health-ADFS)を作成することができます。
 
 * ### [AD FSのプライマリ認証にワンタイムパスコードを利用する (オプション)](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-and-azure-mfa)
     Windows Server 2016ベースのAD FSとAzure MFAの組み合わせで、プライマリ認証にワンタイムパスコードを利用することが可能です。ブルートフォース攻撃やパスワードスプレー攻撃等への対策になります。
