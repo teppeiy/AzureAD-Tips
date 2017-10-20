@@ -28,3 +28,7 @@ https://blog.msresource.net/2015/12/11/ad-fs-enhanced-protection-for-authenticat
 * network.automatic-ntlm-auth.trusted-uris
 
 ![Firefox Zone Configuration](https://msresource.files.wordpress.com/2015/12/epafirefoxiwasettingsview.png)
+
+
+## 以下も参考
+https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-intranet-forms-based-authentication-for-devices-that-do-not-support-wia

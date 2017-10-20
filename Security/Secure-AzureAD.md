@@ -9,7 +9,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     * Just-In-Time権限昇格機能(PIM)の有効化
 * [リスクのフラグ付きユーザーのレポートの有効化](#リスクのフラグ付きユーザーのレポートの有効化)
 * [パスワードポシリーの強化](#パスワードポシリーの強化)
-* [ADFSの保護 (ADFS利用の場合)](#ADFSの保護)
+* [ADFSの保護](#ADFSの保護)
     * ADFS Extranet Lockout Protection の有効化
     * Azure AD Connect Health for ADFS の有効化
 
@@ -30,11 +30,11 @@ WIP
 
 ## [リスクのフラグ付きユーザーのレポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、侵害された可能性の高いユーザーに関するレポートを提供しています。  
-この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)が必須です。
+この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)が必須です。ADFS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。
 
 
 ### パスワードハッシュをAzure ADに同期することの安全性について
-パスワードハッシュと言えども、Azure ADに同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
+パスワードハッシュと言えども、Azure ADに同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
 
 #### パスワードハッシュ同期のメカニズム
 パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルト+ストレッチング+ハッシュといったテクニックを使い、攻撃リスクを軽減する対策を経てAzure ADへ同期します。
@@ -49,8 +49,9 @@ WIP
 具体的には、ADに保存されているMD4でハッシュ化されたパスワードにsaltを付加、[PBKDF2](https://www.ietf.org/rfc/rfc2898.txt)関数で計算後、[HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx)
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
-#### [Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)
-Azure ADの基本機能である[Smart Password Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、大量のパスワードを試行等への防御策です。ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、そのユーザー アカウントをロックします。 Azure AD は、特定のログイン セッションについてのリスクを判別できるように設計されています。 サイバー脅威を止めるために、最新のセキュリティ データを利用してロックアウト セマンティクスを適用します。
+#### [Smart Lockout (非フェデレーション環境において)](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)
+Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、大量のパスワードを試行等への防御策です。ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、そのユーザー アカウントをロックします。 Azure AD は、特定のログイン セッションについてのリスクを判別できるように設計されています。 サイバー脅威を止めるために、最新のセキュリティ データを利用してロックアウト セマンティクスを適用します。  
+フェデレーション環境においては、同様な防御策をADFS等で行う必要がありますが、それについては[ADFSの保護](#ADFSの保護)をご覧ください。
 
 ### 手順
 1. [Azure AD Connectの構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
@@ -69,6 +70,11 @@ ADFSの廃止については、[こちら](Goodbye-ADFS.md)も参照ください
     この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。
 ## ADFSの保護
 * ### [ADFS Extranet Lockout Protection](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-extranet-lockout-protection) の有効化  
-    ADFS利用の場合、この機能を有効化することにより、ADFSへのブルートフォースアタック等への対策になります。  
+    ADFS利用の場合、この機能を有効化することにより、ADFSへのブルートフォース攻撃等への対策になります。  
+* ### [ADFSのプライマリ認証にワンタイムパスコードを利用する](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-and-azure-mfa)
+    Windows Server 2016 ベースの ADFS と Azure MFA の組み合わせで、プライマリ認証にワンタイムパスコードを利用することが可能です。ブルートフォース攻撃やパスワードスプレー攻撃等への対策になります。
+
+![https://youtu.be/vlEE5DqpwUs]
+
 * ### [Azure AD Connect Health for ADFS](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health) の有効化  
     この機能を有効化することで、無効なユーザー名とパスワードによる試行を行った上位 50 人のユーザーと直近の IP アドレスなど、ADFS に関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health-adfs)を作成することができます。
