@@ -17,6 +17,10 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 
 ## 特権アカウントの保護
 特権アカウント、特に全体管理者 (Global Admin) や、Exchange管理者権限が盗まれた場合には、会社を乗っ取られたと言っても過言ではないぐらいの影響を及ぼすため、**必ず**特別な保護してください。
+* ### 全体管理者数は極力少なく
+    ほとんどの企業では、全体管理者は多くても2～3アカウントで十分に事足りるはずです。必要な管理作業を遂行することができる最小の権限を[管理者ロール](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-assign-admin-roles-azure-portal)の中から割り当てることで、特権アカウントの意図しない利用や不正な利用のリスクを最小限にします。
+    <!--#### Breaking Glass シナリオWIP-->
+
 * ### [多要素認証(MFA)](https://docs.microsoft.com/ja-jp/azure/multi-factor-authentication/multi-factor-authentication)を強制
     特権アカウントグループを作成し、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
     もしくは、個々の特権アカウントに対し、MFAを強制します。
@@ -27,18 +31,14 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     更に強固な保護には、専用マシンからのみのアクセスを許可するよう実装をしてください。[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)や、AD FSのIPアドレス制限、証明書認証等を利用することで実装します。
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
 
-<!--
-#### Breaking Glass シナリオ
-WIP
--->
 
-## [リスクのフラグ付きユーザーのレポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
+## [リスクのフラグ付きユーザーのレポート (Leaked Credential)](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関するレポートを提供しています。  
-この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)が必須です。AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。
+この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)が必須です。AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
 
 
 ### パスワードハッシュをAzure ADに同期することの安全性について
-パスワードハッシュと言えども、Azure ADに同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
+パスワードハッシュと言えども、Azure ADに資格情報を同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
 
 #### パスワードハッシュ同期のメカニズム
 パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルト+ストレッチング+ハッシュといったテクニックを使い、攻撃リスクを軽減するプロセスを通してAzure ADへ同期します。
@@ -67,7 +67,7 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 ### 自動対処
 [Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用すると、漏洩したアカウントを検出すると、次回ログイン時にMFAやパスワード変更を強制することが可能です。[Azure AD Identity Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection)を利用するにはAzure AD Premium P2ライセンスが必要になります。
 
-### パスワードハッシュ同期をすることによるその他のメリット  
+### パスワードハッシュ同期の有効化によるその他のメリット  
 #### 1. ディザスタリカバリへの対策  
 フェデレーション環境において、AD FS/WAPが利用できなくなった際には、Office 365等Azure ADに認証を依存しているサービスへのログインが利用できなくなります。実際にAD FSがPetya等のランサムウェアに感染した企業において、パスワードハッシュ同期をしていた企業はAD FSからAzure ADへの認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FSを構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 #### 2. 近い将来AD FSを廃止することへの準備  

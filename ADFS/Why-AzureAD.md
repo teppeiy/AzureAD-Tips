@@ -1,4 +1,4 @@
-[Choose the right sign-in option to connect to Azure AD & Office 365](https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/)
+
 
 https://blogs.technet.microsoft.com/enterprisemobility/2016/07/29/azure-ad-mailbag-hybrid-identity-and-adfs-part-2/
 
