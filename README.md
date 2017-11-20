@@ -1,6 +1,6 @@
 ## セキュリティ
 #### [Azure AD・認証基盤のセキュリティ対策](Security/Secure-AzureAD.md)  
-#### [テナントのセキュリティの脆弱性を検出する](Security/Activate-P2.md)
+#### [テナントのセキュリティの脆弱性を検出する](Security/Discover-vulnerability.md)
 
 ## ADFS  
 #### [なぜADFSよりもAzureADをIdPとすべきか](ADFS/Why-AzureAD.md)

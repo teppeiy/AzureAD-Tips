@@ -7,7 +7,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 * [特権アカウントの保護](#特権アカウントの保護)
     * 多要素認証の有効化
     * Just-In-Time権限昇格機能(PIM)の有効化
-* [リスクのフラグ付きユーザーのレポートの有効化](#リスクのフラグ付きユーザーのレポートの有効化)
+* [漏洩したIDのレポートの有効化](#漏洩したIDのレポートの有効化)
 * [パスワードポシリーの強化](#パスワードポシリーの強化)
 * [AD FSの保護](#ad-fsの保護)
     * AD FS Extranet Lockout Protection の有効化
@@ -32,9 +32,10 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
 
 
-## [リスクのフラグ付きユーザーのレポート (Leaked Credential)](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
+## [漏洩したIDのレポートの有効化](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関するレポートを提供しています。  
-この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)が必須です。AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
+この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)をするだけです。  
+AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
 
 
 ### パスワードハッシュをAzure ADに同期することの安全性について
@@ -85,7 +86,10 @@ AD FSの廃止については、[こちら](Goodbye-ADFS.md)も参照くださ�
 * ### [Azure AD Connect Health for AD FS](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health) の有効化  
     この機能を有効化することで、無効なユーザー名とパスワードによる試行を行った上位 50 人のユーザーと直近の IP アドレスなど、AD FS に関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/connect-health/active-directory-aadconnect-health-ADFS)を作成することができます。
 
+<!--
 * ### [AD FSのプライマリ認証にワンタイムパスコードを利用する (オプション)](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-and-azure-mfa)
     Windows Server 2016ベースのAD FSとAzure MFAの組み合わせで、プライマリ認証にワンタイムパスコードを利用することが可能です。ブルートフォース攻撃やパスワードスプレー攻撃等への対策になります。
 
     [![Azure MFA as AD FS Primary Authentication Method](http://img.youtube.com/vi/vlEE5DqpwUs/0.jpg)](http://www.youtube.com/watch?v=vlEE5DqpwUs)
+
+-->
