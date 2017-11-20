@@ -7,7 +7,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 * [特権アカウントの保護](#特権アカウントの保護)
     * 多要素認証(MFA) の有効化
     * Privileged Identity Management(PIM) の有効化
-* [漏洩したIDのレポートの有効化](#漏洩したIDのレポートの有効化)
+* [漏洩したIDの検出](#漏洩したIDの検出)
     * パスワードハッシュ同期の有効化
 * [パスワードポシリーの強化](#パスワードポシリーの強化)
     * セルフサービスパスワードリセットの有効化
@@ -33,7 +33,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
 
 
-## [漏洩したIDのレポートの有効化](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) の有効化
+## [漏洩したIDの検出](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) 
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関するレポートを提供しています。  
 この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)をするだけです。  
 AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
