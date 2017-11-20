@@ -60,27 +60,24 @@ Ignite 2017 - [Shut the door to cybercrime with Azure Active Directory risk-base
 
 ## 1.2. AD FSに依存しているサービスを移行
 ### 移行可否の判断のための観点
-* アプリケーション (証明書利用者信頼)   
-AD FSをIdentity Providerとしているアプリケーションを棚卸しします。そしてRelying Party毎のアクセス制御方法 (クレームルール) がAzure ADで実装可能か確認します。
-* 認証方式   
-AD FSでしか利用することのできない認証方式が必要か確認します。
+* アプリ (証明書利用者信頼) 毎のクレームルール    
+AD FSをIdentity Providerとしているアプリケーションを棚卸しします。そして、証明書利用者信頼毎の発行変換ルール(Issuance Transformation Rules)がAzure ADで実装可能か確認します。また、発行承認ルール(Issuance Authorization Rules)は、Azure ADの条件付きアクセスへ移行します。
 * ライセンス   
 移行に際して必要なライセンスを保持しているか確認します。
 
-### アプリケーション (証明書利用者信頼)   
-現状の棚卸し、移行判断にはAzure AD開発部門で開発した[AD FS Config Dump](ADFS-Config-Dump.md)により取得したAD FSの設定情報から、証明書利用者信頼の移行判定レポートを提供します。
+### アプリ (証明書利用者信頼)の棚卸し  
+移行判断にはAzure AD開発部門で開発した[AD FS Config Dump](ADFS-Config-Dump.md)により取得したAD FSの設定情報から、証明書利用者信頼の移行判定レポートを提供します。
 
-#### 考慮ポイント
-* EncryptClaims  
-トークンを暗号化している状態にあります。現状Azure ADではサポートされていない機能です。本当にトークンの暗号化が必須要件であるか再度検討をお奨めいたします。
-また、Azure ADでも近々トークン暗号化をサポートする予定です。
-* IssuanceAuthorizationRule（クレーム発行許可ルール）  
-いわゆるクレームルールで、アクセス制御している状態にあります。Azure ADの条件付きアクセスを利用することで、更に柔軟で管理のしやすいアクセス制御をすることが可能です。移行における大部分の労力はクレームルール⇒条件付きアクセスの移行に費やされることになります。
-* その他AD FSでしか実現することができない要件の確認
-Azure ADの継続的な機能向上に伴い、AD FSでしか実現できないシナリオは急速に減りつつありますが、まだ、いくつか気を付けるべきポイントが存在します。
-    * ユーザー属性に応じた動的なクレーム発行等、複雑なクレーム発行ルール  
+### 考慮ポイント
+* トークンに関する要件、発行変換ルール  
+Azure ADの継続的な機能向上に伴い、AD FSでしか実現できないシナリオは急速に減りつつあります。
+    * トークンの暗号化、SAML1.1トークンもAzure ADでサポートされています
+    * 近日中に、ToLowercaseやRegexReplaceを利用した動的なクレーム発行も実現可能です
 
-### アクセス制御：クレームルール から[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)へ移行
+* クレーム発行許可ルール  
+アクセス制御をAzure ADの条件付きアクセスを利用することで、更に柔軟で管理のしやすいアクセス制御をすることが可能です。移行における大部分の労力はクレームルール⇒条件付きアクセスの移行に費やされることになります。
+
+### アクセス制御：承認要求規則から[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)へ移行
 メリット
 * より柔軟なアクセス制御
 * リスクベースの条件付きアクセスの適用(要P2)   
