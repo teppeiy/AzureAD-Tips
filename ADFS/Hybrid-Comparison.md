@@ -1,11 +1,15 @@
 # ハイブリッドID環境の比較
 
-マイクロソフトは、以下の順で検討することを推奨しています。   
+マイクロソフトは、以下の優先順で認証方式を検討することを推奨しています。   
 1. パスワードハッシュ同期(+シームレスSSO)
 2. パススルー認証(+シームレスSSO)
 3. AD FS
 
-[Choose the right sign-in option to connect to Azure AD & Office 365](https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/) の意訳
+
+また、セキュリティ強化の観点から、すべてのオプションにおいてパスワードハッシュ同期を有効にすることをお奨めしています。詳しくは、[AzureADのセキュリティ強化](/Security/Secure-AzureAD.md)を参照ください。
+
+
+以下、[Choose the right sign-in option to connect to Azure AD & Office 365](https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/) より抜粋・意訳
 
 
 ## インフラストラクチャー、運用
