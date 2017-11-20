@@ -18,8 +18,8 @@
 |ADアカウント無効化に伴うAzureADアカウント無効化のタイミング | 同期サイクルである30分後（既定）に反映される |即座|即座|
 |ADアカウントロックアウト時のAzureADアカウント認証可否|可|否|否|
 |ADアカウントのパスワード失効時のAzureADアカウント認証可否|可|否|否|
-|信頼関係がある複数のAD フォレストのユーザーの認証|	はい|	はい|	はい|
-|信頼関係がない複数のAD フォレストのユーザーの認証|はい|	いいえ	|はい（AD FS 2016）|
+|信頼関係がある複数のAD フォレストのユーザーの認証|はい|	はい|	はい|
+|信頼関係がない複数のAD フォレストのユーザーの認証 see note 3|はい|	いいえ	|はい（AD FS 2016）|
 |サードパーティーの LDAP ディレクトリによるサインインSee note 4|いいえ|いいえ|はい(AD FS 2016)|
 |Authenticator Appをプライマリ認証として利用（パスワードレス認証）|	いいえ|いいえ|はい(AD FS 2016)|
 
@@ -27,9 +27,9 @@
 | オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
 |---|---|---|---|
 |Azure MFA(SMS、電話、ワンタイムパスコード)|はい|はい|はい|
-|Pinモード & H/Wトークンのサポート|coming soon|coming soon|はい|
+|MFA Server(PINモード & H/Wトークン)|いいえ|いいえ|はい|
 |Win10 の Windows Hello for Business（キー ベース）|はい|	はい|はい（AD FS 2016）|
-|Win10 の Windows Hello for Business（証明書ベース）see note 5|	はい（with MDM）|	はい（with MDM)|	はい|
+|Win10 の Windows Hello for Business（証明書ベース）see note 5|はい（with MDM）|はい（with MDM)|はい|
 |サードパーティーMFA連携 see note 6|	はい(Premium P2)|	はい(Premium P2)|はい|
 |カスタムMFAプロバイダ|いいえ|いいえ|はい|
 
@@ -37,12 +37,14 @@
 | オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
 |---|---|---|---|
 |ブラウザー|はい|はい|はい|
-|Exchange Active Sync (EAS)	|はい	|Coming Soon|はい|
-|ネイティブアプリ (レガシー認証)|はい|	Coming Soon	|はい|
+|Exchange Active Sync (EAS)	|はい|はい|はい|
+|ネイティブアプリ (レガシー認証)|はい|Coming Soon	|はい|
 |ネイティブアプリ (モダン認証)|はい|はい|はい|
 |Win10 PCサインイン with U/P on AzureAD参加デバイス|はい|Coming Soon|はい|
 
 ## サインインエクスペリエンス
+| オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
+|---|---|---|---|
 |サインイン ページのカスタマイズ|はい(Premium P1)|はい(Premium P1)|はい|
 |CSS や JavaScript によるカスタマイズ|いいえ|いいえ|はい|
 |UPNを使ったサインイン|はい|はい|はい|
@@ -51,18 +53,24 @@
 |Seamless 2nd time sign-in to O365 native apps on Domain Joined devices|はい|はい|はい|
 
 ## パスワード失効時の通知・変更
+| オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
+|---|---|---|---|
 |パスワード期限切れ通知|いいえ|いいえ|はい|
 |Custom password change URL link shown in Office Portal & Win10 desktop|いいえ|いいえ|はい|
 |Integrated password change experience when user’s password has expired|いいえ|いいえ|はい|
 
 
 ## デバイスとアクセスコントロール
+| オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
+|---|---|---|---|
 |デバイス登録 : ドメイン参加Win10|はい|はい	|はい|
 |デバイス登録 : ドメイン参加Win7/8.1|はい	|はい	|はい|
 |レガシープロトコルのブロック	|Coming Soon (Premium)|	Coming Soon (Premium)|	はい|
 |イントラネットからのみレガシープロトコルの許可（Office 2010 など）|Coming Soon (Premium)|Coming Soon (Premium)|はい|
 
 
+| オプション  | パスワード同期 + sSSO  | パススルー認証 + sSSO  |  AD FS |
+|---|---|---|---|
 |Azure AD の条件付きアクセス|はい|	はい|	はい|
 |リモートから Azure AD へのアクセスをオンプレミスで認証する	|いいえ|	はい|	はい|
 
