@@ -80,7 +80,7 @@ Azure ADの継続的な機能向上に伴い、AD FSでしか実現できない�
 ### アクセス制御：承認要求規則から[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)へ移行
 メリット
 * より柔軟なアクセス制御
-* リスクベースの条件付きアクセスの適用(要P2)   
+* リスクベースの条件付きアクセスの適用(要P2)  
 
 #### 考慮ポイント
 レガシープロトコルの条件付きアクセス対応 → 近い将来実現予定  
