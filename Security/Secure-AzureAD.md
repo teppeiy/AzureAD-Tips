@@ -36,8 +36,8 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
 
 
-## [漏洩したIDの検出](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) 
-マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関するレポートを提供しています。  
+## 漏洩したIDの検出 
+マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk)を提供しています。  
 この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)をするだけです。  
 AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
 
@@ -58,7 +58,7 @@ AD FS等を利用するフェデレーション環境においても、パスワ
 具体的には、ADに保存されているMD4でハッシュ化されたパスワードにsaltを付加、[PBKDF2](https://www.ietf.org/rfc/rfc2898.txt)関数で計算後、[HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx)
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
-#### [Smart Lockout (非フェデレーション環境において)](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)
+#### Smart Lockout (非フェデレーション環境において)
 Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、ブルートフォース攻撃等への防御策です。
 既定のロックアウトしきい値は試行失敗 10 回で、既定のロックアウト期間は 60 秒です。
 また、スマート ロックアウトは正規のユーザーによるサインインと攻撃者によるサインインを区別し、ほとんどの場合は攻撃者のみをロックアウトします。 この機能は、攻撃者の悪意によって正規のユーザーがロックアウトされるのを防ぎます。 正規のユーザーと攻撃者を区別するには、過去のサインイン動作、ユーザーのデバイスとブラウザー、その他のシグナルが使われます。 アルゴリズムは常に改善されています。
