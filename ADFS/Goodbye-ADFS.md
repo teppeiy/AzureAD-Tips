@@ -82,25 +82,19 @@ Azure ADの継続的な機能向上に伴い、AD FSでしか実現できない�
 * グループクレーム
 * 複雑なクレーム発行ルール  
 * ・・・   
-https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/
 
 #### クレームルール から[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)へ移行
 メリット
 * より柔軟なアクセス制御
 * リスクベースのアクセスの適用(要P2)   
 
-考慮ポイント
-* レガシー認証のブロック → CY2017中に実現
-* レガシー認証の条件付きアクセス → CY2018中に実現
-https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/
-
-
-### 認証方式   
-AD FSが必要な認証方式があります。
+#### 考慮ポイント
+* レガシー認証のブロック → 近い将来実現予定
+* レガシー認証の条件付きアクセス → 近い将来実現予定
 * クライアント証明書を使った認証
-* ｘｘｘｘ
 
-https://blogs.msdn.microsoft.com/samueld/2017/06/13/choosing-the-right-sign-in-option-to-connect-to-azure-ad-office-365/
+詳しくは、[ハイブリッドID認証方式の比較](Hybrid-Comparison.md)を参照ください。
+
 
 ### ライセンス
 AD FSでクレームルールを利用し、場所ベースのアクセス制御をしている利用ケースは少なくありません。これと同様あるいは更に高度な機能な有する条件付きアクセスを利用することになりますが、Azure AD Premium P1ライセンスが必要になります。これまで、ITシステムの利用が限られているユーザー（例：工場勤務の従業員等）がライセンスを保持していない場合には、追加購入の検討が必要になります。
@@ -112,6 +106,4 @@ AD FSでクレームルールを利用し、場所ベースのアクセス制御
 ##### この方式の問題点
 オンプレADでCA Usersグループに対象アカウントを登録し、Azure AD Connectでグループメンバーシップ情報がAzure ADへ同期されるまでの間（最大30分程度、同期周期に依存）、AD FSのクレームルールはバイパス、条件付きアクセスの対象にならない（＝アクセス許可）という状態が存在する
 リスク軽減方法 => CA Usersグループにメンバーを追加した直後に同期をする等
-
-
 

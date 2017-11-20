@@ -77,7 +77,7 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 フェデレーション環境において、AD FS/WAPが利用できなくなった際には、Office 365等Azure ADに認証を依存しているサービスへのログインが利用できなくなります。実際にAD FSがPetya等のランサムウェアに感染した企業において、パスワードハッシュ同期をしていた企業はAD FSからAzure ADへの認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FSを構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 #### 2. 近い将来AD FSを廃止することへの準備  
 これまで多くのケースでAD FSが必要でしたが、昨今のAzure ADの急速な進化により、AD FSが無くとも多くの要件が満たせるようになってきました。その例として、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用することにより、アクセス元IPアドレスに基づいたアクセス許可・拒否が可能になってきています。また、[シームレスシングルサインオン(SeamlessSSO)](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnect-sso)を利用することで、シングルサインオンも実現可能になりました。  
-AD FSの廃止については、[こちら](Goodbye-ADFS.md)も参照ください。
+AD FSの廃止については、[こちら](/ADFS/Goodbye-ADFS.md)も参照ください。
 
 ## パスワードポシリーの強化
 * ### [脆弱なパスワード利用禁止ポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
