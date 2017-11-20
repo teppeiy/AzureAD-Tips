@@ -25,7 +25,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 * ### [多要素認証(MFA)](https://docs.microsoft.com/ja-jp/azure/multi-factor-authentication/multi-factor-authentication)を強制
     特権アカウントグループを作成し、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
     もしくは、個々の特権アカウントに対し、MFAを強制します。
-* ### Just-In-Time 権限昇格機能 (PIM) の有効化  
+* ### Privileged Identity Management(PIM) の有効化  
     時間制限付の権限昇格機能である[Privileged Identity Protection (PIM)](https://docs.microsoft.com/ja-jp/azure/active-directory/privileged-identity-management/active-directory-securing-privileged-access) は、最低限必要な時間帯のみ権限の行使を許可することで、攻撃からのリスクを劇的に軽減することができます。Azure AD Premium P2ライセンスが必要ですが、特権アカウント分だけでも購入する価値はあります。  
     PIMを有効化した場合でも、普段メール等で利用するアカウントと特権アカウントを分けて利用することをお奨めしています。
 * ### 特権アクセス ワークステーション (PAW) の利用 (オプション)  
