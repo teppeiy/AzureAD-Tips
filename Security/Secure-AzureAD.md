@@ -5,14 +5,15 @@
 Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策を記載します。
 ## 推奨事項
 * [特権アカウントの保護](#特権アカウントの保護)
-    * 多要素認証の有効化
-    * Just-In-Time権限昇格機能(PIM)の有効化
+    * 多要素認証(MFA) の有効化
+    * Privileged Identity Management(PIM) の有効化
 * [漏洩したIDのレポートの有効化](#漏洩したIDのレポートの有効化)
+    * パスワードハッシュ同期の有効化
 * [パスワードポシリーの強化](#パスワードポシリーの強化)
+    * セルフサービスパスワードリセットの有効化
 * [AD FSの保護](#ad-fsの保護)
     * AD FS Extranet Lockout Protection の有効化
     * Azure AD Connect Health for AD FS の有効化
-    * AD FSのプライマリ認証にワンタイムパスコードを利用する (オプション)
 
 
 ## 特権アカウントの保護
@@ -76,9 +77,10 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 AD FSの廃止については、[こちら](Goodbye-ADFS.md)も参照ください。
 
 ## パスワードポシリーの強化
-* ### [動的な禁止パスワードポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
-    Azure AD と Microsoft アカウントでは、パスワードを確実に保護するために、よく使われているパスワードが動的に禁止されています。 Azure AD Identity Protection チームは、禁止パスワード リストを定期的に分析し、ありきたりのパスワードをユーザーが選択できないようにしています。 このサービスは、Azure AD と Microsoft アカウント サービスのユーザーが利用できます。
-    この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。
+* ### [脆弱なパスワード利用禁止ポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
+    Azure AD と Microsoft アカウントでは、よく攻撃に利用されているパスワードを保持しています。そして、それらのパスワードをユーザーが設定できないようなメカニズムを持っています。
+    この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。  
+    注；同期IDを利用している場合、ユーザーが直接オンプレミスのADでパスワードを更新した場合には、よく利用される脆弱なパスワード禁止ポリシーは適用されません。今後の機能拡張において、オンプレミスのADでも禁止ポリシーが適用できるような仕組みを検討中です。
 ## AD FSの保護
 * ### [AD FS Extranet Lockout Protection](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-extranet-lockout-protection) の有効化  
     AD FS利用の場合、この機能を有効化することにより、AD FSへのブルートフォース攻撃等への対策になります。  
