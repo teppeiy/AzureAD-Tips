@@ -17,6 +17,7 @@
 #### [ADFSのログイン画面にSSPRへのリンクを表示  (ADFS利用の場合)](UX/ADFS-SSPR-Link.md)
 
 ## SSO
+#### [ハイブリッドID認証方式の比較](ADFS/Hybrid-Comparison.md)
 #### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
 
 
