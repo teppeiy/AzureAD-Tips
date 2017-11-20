@@ -1,5 +1,5 @@
 ## セキュリティ
-#### [Azure AD・認証基盤のセキュリティ対策](Security/Secure-AzureAD.md)  
+#### [Azure ADのセキュリティ強化](Security/Secure-AzureAD.md)  
 #### [テナントのセキュリティの脆弱性を検出する](Security/Discover-vulnerability.md)
 
 ## ADFS  
