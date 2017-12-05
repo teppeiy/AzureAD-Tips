@@ -1,5 +1,4 @@
 # ADFS Config Dump
-# ykodma added
 
 ADFS上で以下のPowerShellを実行すると、Relying Party（証明書利用者信頼）の構成情報がデスクトップに出力されます。
 
