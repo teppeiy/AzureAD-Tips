@@ -11,6 +11,9 @@
 #### [MFAのベストプラクティス](MFA/MFA-Best-Practice.md)
 #### [MFAのリセット作業をヘルプデスク委譲する](MFA/Delegate-MFA-Reset.md)
 
+## 条件付きアクセス
+#### [条件付きアクセスのFAQ](CA/CA-Faq.md)
+
 ## ユーザーエクスペリエンス
 #### [ユーザーID (UPN) 入力を省きたい](UX/HRD-Acceleration.md)
 #### [ChromeやFirefoxでも統合Windows認証したい (ADFS利用の場合)](UX/ADFS-IWA.md)
