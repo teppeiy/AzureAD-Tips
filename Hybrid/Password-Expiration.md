@@ -8,6 +8,4 @@
 
 これは、オンプレミスADがパスワード有効期限の計算をユーザーログイン時にリアルタイムで計算しており、ユーザー属性に有効期限を値が存在しないというのが技術的な制約が背景にあります。  
   
-もし、オンプレミスADとAzure ADのパスワードポリシーで指定するパスワード有効期限を同じに設定できる場合、同期されたオンプレミスアカウントのパスワードをAzure ADのパスワード有効期限として扱う方法があります（一般には非公開）。
-* オンプレミスAD のパスワード有効期限 [既定で42日](https://technet.microsoft.com/ja-jp/library/hh994573%28v=ws.11%29.aspx?f=255&MSPPError=-2147217396)
-* Azure AD のパスワード有効期限 [既定で90日](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-policy#password-policies-that-only-apply-to-cloud-user-accounts) 
+Azure AD 開発部門では、CY18中に解決できるようソリューションを検討しています。
