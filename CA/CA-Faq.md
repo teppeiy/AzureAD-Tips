@@ -27,6 +27,14 @@
 * ドメイン参加済みであることが必要 (ハイブリッド Azure AD) 
 
 
+### Q2. Intuneへの登録が失敗します
+条件付きアクセスで、**全て**のクラウドアプリへのアクセスを**ブロック**、というポリシーが適用されている場合、Intuneへの登録が失敗します。
+"Microsoft Intune Enrollment"クラウドアプリを対象外にしていても登録が失敗します。  
+これは、Intuneへの登録プロセスにおいて、Intune Company Portalアプリが"Microsoft Intune Enrollment"以外のクラウドアプリへアクセスする必要があるからです。そのクラウドアプリは、条件付きアクセスの対象外アプリとして選択することができません。
+
+対処方法：全てのクラウドアプリへのアクセスを**ブロック**する代わりに、**デバイスは準拠しているとしてマーク済みである必要があります**を利用します。この場合、"Microsoft Intune Enrollment"クラウドアプリを対象外に設定せずともIntuneの登録は可能です。
+
+
 ### その他のよくある質問
 
 [Japan Azure Identity Support Blog](https://blogs.technet.microsoft.com/jpazureid/) より [Azure AD の条件付きアクセスに関する Q&A](https://blogs.technet.microsoft.com/jpazureid/2017/12/04/conditional-access-qa/)もご参考ください。
