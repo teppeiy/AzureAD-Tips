@@ -17,6 +17,7 @@
 
 ## ユーザーエクスペリエンス
 #### [ユーザーID (UPN) 入力を省きたい](UX/HRD-Acceleration.md)
+#### [特定アプリへのアクセス時に必ずID/Passを入力させたい](UX/Force-Login.md)
 #### [ChromeやFirefoxでも統合Windows認証したい (ADFS利用の場合)](UX/ADFS-IWA.md)
 #### [ADFSのログイン画面にSSPRへのリンクを表示  (ADFS利用の場合)](UX/ADFS-SSPR-Link.md)
 
