@@ -23,7 +23,7 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/develop/active-directory
 ### OpenID Connectのアプリ
 OpenID Connectプロトコルを利用する場合、サインイン要求にprompt=loginを指定します。
 
-SAML Requestの例
+サインイン要求の例
 ```
 GET https://login.microsoftonline.com/{tenant}/oauth2/authorize?
 client_id=6731de76-14a6-49ae-97bc-6eba6914391e
