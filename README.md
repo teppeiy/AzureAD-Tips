@@ -22,6 +22,7 @@
 #### [ADFSのログイン画面にSSPRへのリンクを表示  (ADFS利用の場合)](UX/ADFS-SSPR-Link.md)
 
 ## SSO
+#### [複数SaaSインスタンスを1つのAzureADテナントへ連携可能か？](SSO/SaaS-Limitations.md)
 #### [ハイブリッドID認証方式の比較](ADFS/HybridId-Comparison.md)
 #### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
 
