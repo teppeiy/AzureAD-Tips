@@ -1,8 +1,8 @@
 # EmployeeIDをユーザー識別子として利用したい
 2017/10現在、EmployeeIDはAzure Portalにてカスタムクレームマッピングポリシーを設定することができないため、PowerShellを利用して設定する必要があります。  
-```
+~~~
 注：PowerShellでカスタムクレームマッピングポリシー設定したら、Azure Portal上（エンタープライズアプリケーション - シングルサインオン ブレード）でクレームマッピングポリシーを変更しないでください。また、Azure Portal上ではPowerShellで設定したポリシーを確認することはできず、ポリシー設定前のマッピング設定が表示されている状態です。
-```
+~~~
 
 https://docs.microsoft.com/en-us/azure/active-directory/active-directory-claims-mapping
 
