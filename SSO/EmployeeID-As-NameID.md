@@ -3,7 +3,6 @@
 
 注：PowerShellでカスタムクレームマッピングポリシー設定したら、Azure Portal上（エンタープライズアプリケーション - シングルサインオン ブレード）では設定したポリシーを確認することはできず、ポリシー設定前のマッピング設定が表示されます。Azure Portal上でクレームマッピングポリシーを変更しないでください。
 
-
 https://docs.microsoft.com/en-us/azure/active-directory/active-directory-claims-mapping
 
 ```Powershell
