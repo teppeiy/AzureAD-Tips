@@ -30,4 +30,4 @@
 ## ツール・その他
 #### [PowerShell環境のセットアップ](Tools/Powershell-Setup.md)
 #### [FiddlerでiOS/AndroidのHTTP/Sトレースを取得する](Tools/Fiddler-Mobile.md)
-#### [SSOのデバッグ](SSO-Debug.md)
+<!-- WIP #### [SSOのデバッグ](SSO-Debug.md) -->
