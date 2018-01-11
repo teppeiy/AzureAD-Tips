@@ -18,9 +18,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 
 ## 特権アカウントの保護
 特権アカウント、特に全体管理者 (Global Admin) や、Exchange管理者権限が盗まれた場合には、会社を乗っ取られたと言っても過言ではないぐらい多大な影響を及ぼすため、**必ず**特別な保護をしてください。
-~~~
-    特権アカウント保護については、近日中にホワイトペーパーをリリース予定です。
-~~~
+
 * ### 全体管理者数は極力少なく
     ほとんどの企業では、全体管理者は多くても2～3アカウントで十分に事足りるはずです。必要な管理作業を遂行することができる最小の権限を[管理者ロール](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-assign-admin-roles-azure-portal)の中から割り当てることで、特権アカウントの意図しない利用や不正な利用のリスクを最小限にします。
     <!--#### Breaking Glass シナリオWIP-->
@@ -34,6 +32,10 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 * ### 特権アクセス ワークステーション (PAW) の利用 (オプション)  
     更に強固な保護には、専用マシンからのみのアクセスを許可するよう実装をしてください。[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)や、AD FSのIPアドレス制限、証明書認証等を利用することで実装します。
     詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
+
+* ### 緊急アクセス用管理者アカウントの管理
+    [こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-admin-manage-emergency-access-accounts)を参照ください。
+
 
 
 ## 漏洩したIDの検出 
