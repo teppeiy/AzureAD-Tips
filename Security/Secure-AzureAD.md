@@ -4,19 +4,19 @@
 昨今、増大しているセキュリティインシデントの頻度や影響度は、ITの課題ではなく会社の存続をも脅かす経営課題です。75％のセキュリティインシデントは、IDが盗まれたことに起因しているというデータもあり、IDを守ることは非常に有効な防御策です。にもかかわらず、まだ対策が万全でない企業も多いのが現状です。
 Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策を記載します。
 ## 推奨事項
-* [特権アカウントの保護](#特権アカウントの保護)
+* [特権アカウントの保護](#ProtectingPrivilegedAccounts)
     * 多要素認証(MFA) の有効化
     * Privileged Identity Management(PIM) の有効化
-* [漏洩したIDの検出](#漏洩したIDの検出)
+* [漏洩したIDの検出](#LeakedCredentialReport)
     * パスワードハッシュ同期の有効化
-* [パスワードポシリーの強化](#パスワードポシリーの強化)
+* [パスワードポシリーの強化](#StrengethenPasswordPolicy)
     * セルフサービスパスワードリセットの有効化
-* [AD FSの保護](#ad-fsの保護)
+* [AD FSの保護](#ProtectADFS)
     * AD FS Extranet Lockout Protection の有効化
     * Azure AD Connect Health for AD FS の有効化
 
 
-## 特権アカウントの保護
+## <a id="ProtectingPrivilegedAccounts"> </a>特権アカウントの保護
 特権アカウント、特に全体管理者 (Global Admin) や、Exchange管理者権限が盗まれた場合には、会社を乗っ取られたと言っても過言ではないぐらい多大な影響を及ぼすため、**必ず**特別な保護をしてください。
 
 * ### 全体管理者数は極力少なく
@@ -38,7 +38,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 
 
 
-## 漏洩したIDの検出 
+## <a id="LeakedCredentialReport"> </a>漏洩したIDの検出 
 マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk)を提供しています。  
 この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)をするだけです。  
 AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
@@ -81,12 +81,12 @@ Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp
 これまで多くのケースでAD FSが必要でしたが、昨今のAzure ADの急速な進化により、AD FSが無くとも多くの要件が満たせるようになってきました。その例として、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用することにより、アクセス元IPアドレスに基づいたアクセス許可・拒否が可能になってきています。また、[シームレスシングルサインオン(SeamlessSSO)](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnect-sso)を利用することで、シングルサインオンも実現可能になりました。  
 AD FSの廃止については、[こちら](/ADFS/Goodbye-ADFS.md)も参照ください。
 
-## パスワードポシリーの強化
+## <a id="StrengethenPasswordPolicy"> </a>パスワードポシリーの強化
 * ### [脆弱なパスワード利用禁止ポリシー](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords)の有効化   
     Azure AD と Microsoft アカウントでは、よく攻撃に利用されているパスワードを保持しています。そして、それらのパスワードをユーザーが設定できないようなメカニズムを持っています。
     この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。  
     注；同期IDを利用している場合、ユーザーが直接オンプレミスのADでパスワードを更新した場合には、よく利用される脆弱なパスワード禁止ポリシーは適用されません。今後の機能拡張において、オンプレミスのADでも禁止ポリシーが適用できるような仕組みを検討中です。
-## AD FSの保護
+## <a id="ProtectADFS"> </a>AD FSの保護
 * ### [AD FS Extranet Lockout Protection](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-extranet-lockout-protection) の有効化  
     AD FS利用の場合、この機能を有効化することにより、AD FSへのブルートフォース攻撃等への対策になります。  
 
