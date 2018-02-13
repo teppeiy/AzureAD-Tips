@@ -1,5 +1,9 @@
 # ユーザーID (UPN) の入力を省きたい
 
+Docsへ同様な記事を公開しました  
+https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-auto-acceleration-using-hrd
+
+
 ## シナリオ
 ADFSとフェデレーション環境において、SP Initiated SSOフローの際、Azure ADのログイン画面にユーザーID (UPN)を入力する必要があります。これはAzure ADがユーザーのテナントを特定するために必要なプロセスで、これをホームレルムディスカバリー (HRD) と呼びます。  
 ユーザーエクスペリエンスを向上させるため、このステップ (ユーザーがログインIDを入力する手間) を省く方法 (HRDアクセラレーション) が3つあります。 
