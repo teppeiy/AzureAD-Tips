@@ -5,6 +5,7 @@
 ## ADFS  
 #### [なぜADFSよりもAzureADをIdPとすべきか](ADFS/Why-AzureAD.md)
 #### [ADFS廃止のすすめ](ADFS/Goodbye-ADFS.md)
+<!--#### [クレームルールからCAへの移行](ADFS/ClaimRule-CA-Migraion.md)-->
 #### [ADFS Config Dump](ADFS/ADFS-Config-Dump.md)
 
 ## 多要素認証 (MFA)  
