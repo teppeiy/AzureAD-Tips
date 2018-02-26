@@ -5,10 +5,10 @@ Azure AD を IdP に指定することで、様々なSaaSアプリとのSSO連�
 これまでの経験や実績をベースに以下に共有しますが、制限事項はなくなっているケースもありますので（逆も然り）、実際にはSaaSベンダーへご確認することをお奨めいたします。
 
 ### 1つのAzure ADテナントに対し、1つのSaaSインスタンスしか連携できないもの
-* Workday
 * Box
 
 ### 1つのAzure ADテナントに対し、複数のSaaSインスタンスの連携実績があるもの
 * Salesforce
 * Concur
 * ServiceNow
+* Workday
