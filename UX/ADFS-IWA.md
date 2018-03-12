@@ -1,7 +1,7 @@
 # ChromeやFirefoxでも統合Windows認証したい
 
-## ADFS上で以下のPowerShellスクリプトを実行
-
+## ADFS上で以下のPowerShellスクリプトを実行   
+https://docs.microsoft.com/en-us/windows-server/identity/ad-fs/operations/configure-ad-fs-browser-wia
 https://blog.msresource.net/2016/11/18/adfs-iwa-and-the-wiasupporteduseragents-property/
 
 
