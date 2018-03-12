@@ -10,10 +10,7 @@ Get-ADFSProperties | Select  -ExpandProperty WIASupportedUserAgents
 
 $old=(Get-AdfsProperties).WIASupportedUserAgents
 
-# for ADFS3.0 以下は次の2行もコメントアウトしてEdgeやWorkFolderもIWA対象とする
-#$new=$old+"MS_WorkFoldersClient"
-#$new=$old+"=~Windows\s*NT.*Edge"
-
+# Mozilla/5.0を含むクライアントが統合Windows認証対応になる
 $new=$old+"Mozilla/5.0"
 Set-ADFSProperties -WIASupportedUserAgents $new
 ```
