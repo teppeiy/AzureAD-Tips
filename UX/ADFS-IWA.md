@@ -18,6 +18,27 @@ $new=$old+"Mozilla/5.0"
 Set-ADFSProperties -WIASupportedUserAgents $new
 ```
 
+### User-Agentの例
+Edge
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36 Edge/16.16299  
+```
+
+Chrome
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.186 Safari/537.36  
+```  
+
+FireFox  
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:58.0) Gecko/20100101 Firefox/58.0  
+```  
+
+Microsoft Teams クライアント   
+```
+Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Teams/1.1.00.5963 Chrome/59.0.3071.115 Electron/1.8.1 Safari/537.36  
+```
+
 
 ## Firefoxへの信頼済みゾーンの追加
 Firefoxは独自のゾーン設定を利用するため、ADFSにてIWAが利用できるよう、ADFSの社内URLを信頼済みゾーンに追加しておく必要があります。
