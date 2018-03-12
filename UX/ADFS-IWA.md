@@ -10,7 +10,7 @@ Get-ADFSProperties | Select  -ExpandProperty WIASupportedUserAgents
 
 $old=(Get-AdfsProperties).WIASupportedUserAgents
 
-# Mozilla/5.0を含むクライアントが統合Windows認証対応になる
+# Mozilla/5.0を含むクライアントが統合Windows認証対象となる
 $new=$old+"Mozilla/5.0"
 Set-ADFSProperties -WIASupportedUserAgents $new
 ```
