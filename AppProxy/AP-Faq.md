@@ -1,4 +1,4 @@
-# アプリケーションプロキシのFAQ
+# Azure AD アプリケーションプロキシのFAQ
 
 ## 概要
 
@@ -13,10 +13,10 @@
 Content-Type:text/html;charset=utf-8
 ```
 
-### Q2. 公開したアプリのセッション情報引き継ぎがうまくいかない
+### Q2. 公開したウェブアプリのセッション情報引き継ぎがうまくいかない
 
-Cookieを利用してセッションを保持するアプリを公開した際、Cookieが引き継がれないためセッション情報（例：ログイン状態等）がページ間で引き継がれない場合があります。
-その場合、[CSRF](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/301.html)への対策等で、アプリからのCookie発行時（Set-Cookie）に特定ドメインがスコープとして指定されていないか確認してください。ブラウザの開発者モード（F12）やFiddlerが役に立ちます。
+Cookieを利用してセッションを保持するウェブアプリを公開した際、Cookieが引き継がれないためセッション情報（例：ログイン状態等）がページ間で引き継がれない場合があります。
+その場合、[CSRF](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/301.html)への対策等で、ウェブアプリからのCookie発行時（Set-Cookie）に特定ドメインがスコープとして指定されていないか確認してください。ブラウザの開発者モード（F12）やFiddlerが役に立ちます。
 
 ``` HTML
 Set-Cookie: SSO_COOKIE=xxx; path=/; domain=.contoso.local
@@ -30,7 +30,7 @@ Set-Cookie: SSO_COOKIE=xxx; path=/; domain=.contoso.local
 対処方法としては、2点あります。
 
 1. 社内URL＝社外URLにする （[カスタムドメイン](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-application-proxy-custom-domains)の利用）
-2. 1が難しい場合、アプリを改修し、[Cookieのスコープ](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies)を変更する
+2. 1が難しい場合、ウェブアプリを改修し、[Cookieのスコープ](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies)を変更する
 
 ### Q3. JavaScriptを利用しているページが想定どおり動かない
 
@@ -39,4 +39,4 @@ Q2のCookieのケースのように、社外URLと社内URLが異なる場合に
 対処方法としては、2点あります（Cookieのケースとほぼ同じ）。
 
 1. 社内URL＝社外URLにする （[カスタムドメイン](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-application-proxy-custom-domains)の利用）
-2. 1が難しい場合、アプリを改修し、[CORS](https://developer.mozilla.org/ja/docs/Web/HTTP/HTTP_access_control)を考慮・実装する
+2. 1が難しい場合、ウェブアプリを改修し、[CORS](https://developer.mozilla.org/ja/docs/Web/HTTP/HTTP_access_control)を考慮・実装する
