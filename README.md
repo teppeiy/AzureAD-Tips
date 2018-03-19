@@ -48,7 +48,7 @@
 
 ## Azure AD アプリケーションプロキシ
 
-#### [Azure AD アプリケーションプロキシのFAQ](AppProxy/AP-Faq.md)
+#### [Azure AD アプリケーションプロキシのFAQ（ウェブアプリ観点）](AppProxy/AP-Faq.md)
 
 ## ツール・その他
 
