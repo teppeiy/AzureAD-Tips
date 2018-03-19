@@ -1,13 +1,16 @@
 # アプリケーションプロキシのFAQ
 
-## 概要 
+## 概要
+
 アプリケーションプロキシを利用する際、よく聞かれる質問と回答を記載します。
 
 ### Q1. 公開したページが文字化けする
+
 [リンク変換](https://docs.microsoft.com/ja-jp/azure/active-directory/application-proxy-link-translation
 )を利用する場合、アプリケーションが UTF-8 でエンコードされていることを前提としています。 そうなっていない場合には、http 応答ヘッダーでエンコードの種類を Content-Type:text/html;charset=utf-8 のように指定してください。  
 
 ### Q2. 公開したアプリのセッション情報引き継ぎがうまくいかない
+
 Cookieを利用してセッションを保持するアプリを公開した際、Cookieが引き継がれないためセッション情報（例：ログイン状態等）がページ間で引き継がれない場合があります。
 その場合、[CSRF](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/301.html)への対策等で、アプリからのCookie発行時（Set-Cookie）に特定ドメインがスコープとして指定されていないか確認してください。ブラウザの開発者モード（F12）やFiddlerが役に立ちます。
 
@@ -25,6 +28,7 @@ Set-Cookie: SSO_COOKIE=xxx; path=/; domain=.contoso.local
 
 
 ### Q3. JavaScriptを利用しているページが想定どおり動かない
+
 Q2のCookieのケースのように、社外URLと社内URLが異なる場合にドメイン名をまたがるリクエストが発生してしていて、[CSRF](https://www.ipa.go.jp/security/awareness/vendor/programmingv2/contents/301.html)への対策に影響受けていないか確認します。ブラウザの開発者モード（F12）やFiddlerが役に立ちます。
 
 対処方法としては、2点あります（Cookieのケースとほぼ同じ）。
