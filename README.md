@@ -27,6 +27,8 @@
 #### [ハイブリッドID認証方式の比較](ADFS/HybridId-Comparison.md)
 #### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
 
+## Azure AD アプリケーションプロキシ
+#### [アプリケーションプロキシのFAQ](AppProxy/AP-Faq.md)
 
 ## ツール・その他
 #### [PowerShell環境のセットアップ](Tools/Powershell-Setup.md)
