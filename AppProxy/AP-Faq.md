@@ -30,7 +30,7 @@ Set-Cookie: SSO_COOKIE=xxx; path=/; domain=.contoso.local
 対処方法としては、2点あります。
 
 1. 社内URL＝社外URLにする （[カスタムドメイン](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-application-proxy-custom-domains)の利用）
-2. 1が難しい場合、アプリを改修し、SSO Cookieのスコープを変更する（[HTTP Cookie について](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies)）
+2. 1が難しい場合、アプリを改修し、[Cookieのスコープ](https://developer.mozilla.org/ja/docs/Web/HTTP/Cookies)を変更する
 
 ### Q3. JavaScriptを利用しているページが想定どおり動かない
 
