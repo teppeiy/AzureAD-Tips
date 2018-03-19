@@ -7,7 +7,11 @@
 ### Q1. 公開したページが文字化けする
 
 [リンク変換](https://docs.microsoft.com/ja-jp/azure/active-directory/application-proxy-link-translation
-)を利用する場合、アプリケーションが UTF-8 でエンコードされていることを前提としています。 そうなっていない場合には、http 応答ヘッダーでエンコードの種類を Content-Type:text/html;charset=utf-8 のように指定してください。
+)を利用する場合、アプリケーションが UTF-8 でエンコードされていることを前提としています。 そうなっていない場合には、http 応答ヘッダーでエンコードの種類を指定してください。
+
+``` HTML
+Content-Type:text/html;charset=utf-8
+```
 
 ### Q2. 公開したアプリのセッション情報引き継ぎがうまくいかない
 
