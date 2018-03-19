@@ -22,7 +22,7 @@ Cookieを利用してセッションを保持するアプリを公開した際�
 Set-Cookie: SSO_COOKIE=xxx; path=/; domain=.contoso.local
 ```
 
-上記の例は、社内URLが指定されたケースですが、もし以下のような構成の場合、発行されたCookieのスコープ外である社外URLへアクセスした際、そのCookieは利用されません（ブラウザはCookieをリクエストの際に送信しない）。
+上記の例は、社内URLが指定されたケースですが、もし以下のような構成の場合、発行されたCookieのスコープ外である社外URLへアクセスした際、そのCookieは利用されません（ブラウザはリクエストの際にCookieを送信しない）。
 
 * 社外URL： app1-contoso.msappproxy.net
 * 社内URL： conotoso.local
