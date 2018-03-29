@@ -42,7 +42,7 @@
 
 #### [複数SaaSインスタンスを1つのAzureADテナントへ連携可能か？](SSO/SaaS-Limitations.md)
 
-#### [ハイブリッドID認証方式の比較](ADFS/HybridId-Comparison.md)
+#### [ハイブリッドID認証方式の比較](Hybrid/HybridId-Comparison.md)
 
 #### [EmployeeIDをユーザー識別子として利用する](SSO/EmployeeID-As-NameID.md)
 
