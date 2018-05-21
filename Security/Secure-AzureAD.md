@@ -23,7 +23,7 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 特権アカウント、特に全体管理者 (Global Admin) や、Exchange管理者権限が盗まれた場合には、会社を乗っ取られたと言っても過言ではないぐらい多大な影響を及ぼすため、**必ず**特別な保護をしてください。
 
 ### Azure AD でのハイブリッドおよびクラウド デプロイ用の特権アクセスをセキュリティで保護する  
-[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/admin-roles-best-practices)を参照ください。
+完全なガイダンスは、[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/admin-roles-best-practices)を参照ください。以下に即座に実施すべきことを記します。
 
 * ### Privileged Identity Management(PIM) の有効化  
     時間制限付の権限昇格機能である[Privileged Identity Protection (PIM)](https://docs.microsoft.com/ja-jp/azure/active-directory/privileged-identity-management/active-directory-securing-privileged-access) は、最低限必要な時間帯のみ権限の行使を許可することで、攻撃からのリスクを劇的に軽減することができます。Azure AD Premium P2ライセンスが必要ですが、特権アカウント分だけでも購入する価値はあります。  
