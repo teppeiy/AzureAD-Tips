@@ -1,6 +1,6 @@
 # アプリケーション管理者権限の委譲
 
-
+<!--
 
 サンプルスクリプト
 ``` Powershell
@@ -24,3 +24,5 @@ $roleMember = Get-AzureADUser -ObjectId $userPrincipalName
 Add-AzureADDirectoryRoleMember -ObjectId $role.ObjectId -RefObjectId $roleMember.ObjectId
 Get-AzureADDirectoryRoleMember -ObjectId $role.ObjectId | Get-AzureADUser
 ```
+
+-->
