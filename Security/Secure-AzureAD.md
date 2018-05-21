@@ -22,27 +22,29 @@ Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策
 ## <a id="ProtectingPrivilegedAccounts"> </a>特権アカウントの保護
 特権アカウント、特に全体管理者 (Global Admin) や、Exchange管理者権限が盗まれた場合には、会社を乗っ取られたと言っても過言ではないぐらい多大な影響を及ぼすため、**必ず**特別な保護をしてください。
 
-* ### 全体管理者数は極力少なく
-    ほとんどの企業では、全体管理者は多くても2～3アカウントで十分に事足りるはずです。必要な管理作業を遂行することができる最小の権限を[管理者ロール](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-assign-admin-roles-azure-portal)の中から割り当てることで、特権アカウントの意図しない利用や不正な利用のリスクを最小限にします。
-    <!--#### Breaking Glass シナリオWIP-->
+### Azure AD でのハイブリッドおよびクラウド デプロイ用の特権アクセスをセキュリティで保護する  
+[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/admin-roles-best-practices)を参照ください。
 
-* ### [多要素認証(MFA)](https://docs.microsoft.com/ja-jp/azure/multi-factor-authentication/multi-factor-authentication)を強制
-    特権アカウントグループを作成し、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
-    もしくは、個々の特権アカウントに対し、MFAを強制します。
 * ### Privileged Identity Management(PIM) の有効化  
     時間制限付の権限昇格機能である[Privileged Identity Protection (PIM)](https://docs.microsoft.com/ja-jp/azure/active-directory/privileged-identity-management/active-directory-securing-privileged-access) は、最低限必要な時間帯のみ権限の行使を許可することで、攻撃からのリスクを劇的に軽減することができます。Azure AD Premium P2ライセンスが必要ですが、特権アカウント分だけでも購入する価値はあります。  
     PIMを有効化した場合でも、普段メール等で利用するアカウントと特権アカウントを分けて利用することをお奨めしています。
-* ### 特権アクセス ワークステーション (PAW) の利用 (オプション)  
-    更に強固な保護には、専用マシンからのみのアクセスを許可するよう実装をしてください。[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)や、AD FSのIPアドレス制限、証明書認証等を利用することで実装します。
-    詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/windows-server/identity/securing-privileged-access/privileged-access-workstations)を参照ください。  
+
+* ### 最小限の権限を最小数のアカウントへ付与
+    ほとんどの企業では、全体管理者は多くても2～3アカウントで十分に事足りるはずです。また、必要な管理作業を遂行することができる最小の権限を[管理者ロール](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-assign-admin-roles-azure-portal)の中から割り当てることで、特権アカウントの意図しない利用や不正な利用のリスクを最小限にします。PIMのレポートを利用することで、最小限の権限を最小限のユーザーへ割り当てるための棚卸しが効率的になります。
+
+* ### [多要素認証(MFA)](https://docs.microsoft.com/ja-jp/azure/multi-factor-authentication/multi-factor-authentication)を強制
+    特権アカウントグループを作成し、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
+    もしくは、個々の特権アカウントに対し、MFAを強制します。  
+    PIMを有効にすることでMFAが強制されることになりますが、もしP2ライセンスの購入が難しい場合には、必ずMFAを有効にすることを強くお奨めします。
 
 * ### 緊急アクセス用管理者アカウントの管理
+    忘れてはならないのが、緊急時や不注意で管理アクセスが不可能になることを想定した"緊急アクセス用アカウント"の用意です。
     [こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-admin-manage-emergency-access-accounts)を参照ください。
 
 
 
 ## <a id="LeakedCredentialReport"> </a>漏洩したIDの検出 
-マイクロソフトは、ブラックマーケット等の複数のソースから、漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk)を提供しています。  
+マイクロソフトは、複数のソースから漏洩した資格情報（ID/パスワード）一覧を継続的に取得しています。そのリストとAzure ADのアカウントと機械的に突き合わせることにより、漏洩したアカウントに関する[レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk)を提供しています。  
 この機能を利用するには、[パスワードハッシュ同期](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization)をするだけです。  
 AD FS等を利用するフェデレーション環境においても、パスワードハッシュ同期を強くお奨めしています。フェデレーション環境においてパスワードハッシュ同期を有効にしても、ログインフローへの影響は一切ありません。
 
