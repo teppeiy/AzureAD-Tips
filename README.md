@@ -50,6 +50,10 @@
 
 #### [Azure AD アプリケーションプロキシのFAQ（ウェブアプリ観点）](AppProxy/AP-Faq.md)
 
+## 管理者エクスペリエンス
+
+#### [アプリケーション管理者権限の委譲](AdminUX/AppAdminRoles.md)
+
 ## ツール・その他
 
 #### [PowerShell環境のセットアップ](Tools/Powershell-Setup.md)
