@@ -37,3 +37,5 @@ client_id=6731de76-14a6-49ae-97bc-6eba6914391e
 ```
 
 https://docs.microsoft.com/ja-jp/azure/active-directory/develop/active-directory-protocols-openid-connect-code#send-the-sign-in-request
+
+尚、 OpenID Connect 利用の際に追加の多要素認証を求めたいというケースでは上記のサインイン要求に加えて amr_values=mfa を与えることで Azure MFA による多要素認証を求めることができます。ただし、Azure AD 開発部門では将来的に acr_values パラメーターを受け付けようにする機能改修を予定しており、amr_values パラメーターからの移行を推奨する可能性があります。
