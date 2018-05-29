@@ -23,9 +23,10 @@ Azure AD 条件付きアクセスでは、信頼されたデバイスであれ�
 
 |管理状態|対象プラットフォーム|
 |-|-|
-|オンプレミスADドメイン参加していること = グループポリシー適用|Windows 7, Windows 8.1, Windows 10|
+|オンプレミスADドメイン参加していること（[ハイブリッドAzure AD 参加](https://docs.microsoft.com/ja-jp/azure/active-directory/device-management-hybrid-azuread-joined-devices-setup)）<br>=グループポリシー適用|Windows 7/8.1/10|
 |Intuneのポリシーに準拠していること|iOS, Android, Windows 10, Windows Phone, MacOS|
-|SCCMのポリシーに準拠していること（Intune Hybrid, Co-Management）|Windows 7, Windows 8.1, Windows 10|
+|SCCMのポリシーに準拠していること<br>（[Intune Hybrid](https://docs.microsoft.com/ja-jp/sccm/mdm/deploy-use/setup-hybrid-mdm)）|MDM: iOS, Android, Windows 10, Windows Phone, MacOS <br> SCCM Agent: Windows 7/8.1/10
+|Intune/SCCMのポリシーに準拠していること<br>（[Co-Management](https://docs.microsoft.com/ja-jp/sccm/core/clients/manage/co-management-overview)）|Windows 10|
 |その他MDMのポリシーに準拠していること|Windows 10|
 
 注意点： Azure AD参加していることだけでは、信頼のされたデバイス扱いにはならない
