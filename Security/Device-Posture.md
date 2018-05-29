@@ -1,11 +1,8 @@
 # 会社支給 vs BYOD ?
 
 ## 概要
-デバイス状態によるアクセスコントロール、
-信頼されたデバイスからの企業データへのアクセスを許可する
+会社支給デバイスのみに会社メールアクセス制限したい、BYODはブロックしたい、というニーズをよく聞きますが、デバイスの所有者によってアクセス制御するというのはセキュリティの観点からあまり意味はありません。信頼されたデバイスからのみ企業データへのアクセスを許可する、というのがセキュリティと利便性、そして運用管理コストのバランスをとる良い方法かもしれません。
 
-
-## 課題
 
 
 ## デバイスの所有者を区別することの意味は？
@@ -22,25 +19,23 @@ iPhoneから会社のデータ（Exchange Onlineのメール等）にアクセ�
 
 ## セキュリティポリシーに準拠している = 信頼されたデバイス
 
-Azure AD 条件付きアクセスでは、信頼されたデバイスであればアクセスを許可する、というアクセス制御です。以下、Azure AD 条件付きアクセスが、信頼されたデバイスとみなすことができる管理手法です。詳しくは、[こちら](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-policy-connected-applications)を参照ください。
+Azure AD 条件付きアクセスでは、信頼されたデバイスであればアクセスを許可する、というアクセス制御が可能です。以下、Azure AD 条件付きアクセスが、信頼されたデバイスとみなすことができる管理手法です。詳しくは、[こちら](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-policy-connected-applications)を参照ください。
 
 |管理状態|対象プラットフォーム|
 |-|-|
 |オンプレミスADドメイン参加していること = グループポリシー適用|Windows 7, Windows 8.1, Windows 10|
-|Intuneのポリシーに準拠していること|iOS, Android, Windows 10, Windows Phone|
+|Intuneのポリシーに準拠していること|iOS, Android, Windows 10, Windows Phone, MacOS|
 |SCCMのポリシーに準拠していること（Intune Hybrid, Co-Management）|Windows 7, Windows 8.1, Windows 10|
 |その他MDMのポリシーに準拠していること|Windows 10|
 
-```
 注意点： Azure AD参加していることだけでは、信頼のされたデバイス扱いにはならない
 Windows 10 を Azure AD参加させたとしても、Azure AD 単体でセキュリティポリシーを適用するメカニズムを持っていないため、併せてIntune等の管理下におくことが必要です。
-```
 
 
 ## 会社の規定により、BYOD利用を制限したい場合
 * 会社の把握しているデバイス利用に制限したい  
 [Intune の登録制限](https://docs.microsoft.com/ja-jp/intune/enrollment-options)を利用します。IMEI等のデバイス識別番号を管理者が予め登録し、そのデバイスのみをIntuneの管理下におくということが可能です。BYODを許可する場合においても、利用者が申請ベースでIMEIを事前に登録する（マニュアル作業）ことも可能です。
-PCの場合には、オンプレミスADドメインに参加することを会社支給PCのみに制限することで、実現可能です。
+PCの場合には、オンプレミスADドメインに参加することを会社支給PCのみに制限することで実現可能です。
 
 * BYOD利用許可により、従業員からの訴訟リスクが上がる  
 従業員が深く考えずに個人所有デバイスをIntuneに登録し、業務メールを利用していたとします。子供のいたずら等で、PIN入力を規定回数以上に失敗し、個人のデータ（たとえば大切な子供の写真等）がワイプされた場合、企業は訴訟されるかもしれません。そういったリスクを避けるには、
