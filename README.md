@@ -7,9 +7,9 @@
 #### [テナントのセキュリティの脆弱性を可視化する](Security/Discover-vulnerability.md) 
 
 #### [レガシー認証をブロックする](Security/Block-Legacy-Auth.md)  
-
+<!--
 #### [ゼロトラスト セキュリティモデル](Security/Zero-Trust.md)  
-
+-->
 #### [会社支給 vs BYOD ?](Security/Device-Posture.md)
 
 ## ADFS  
