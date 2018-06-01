@@ -21,7 +21,7 @@ iPhoneから会社のデータ（Exchange Onlineのメール等）にアクセ�
 
 Azure AD 条件付きアクセスでは、信頼されたデバイスであればアクセスを許可する、というアクセス制御が可能です。以下、Azure AD 条件付きアクセスが、信頼されたデバイスとみなすことができる管理手法です。詳しくは、[こちら](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-policy-connected-applications)を参照ください。
 
-|管理状態|対象プラットフォーム|
+|「信頼されたデバイス」とみなされる状態|対象プラットフォーム|
 |-|-|
 |オンプレミスADドメイン参加していること（[ハイブリッドAzure AD 参加](https://docs.microsoft.com/ja-jp/azure/active-directory/device-management-hybrid-azuread-joined-devices-setup)）<br>=グループポリシー適用|Windows 7/8.1/10|
 |Intuneのポリシーに準拠していること|iOS, Android, Windows 10, Windows Phone, MacOS|
