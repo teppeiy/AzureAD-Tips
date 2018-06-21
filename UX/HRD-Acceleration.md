@@ -20,7 +20,6 @@ https://myapps.microsoft.com/contoso.com/signin/AppName/2a354c93-d50f-47ed-b303-
 https://myapps.microsoft.com/signin/AppName/2a354c93-d50f-47ed-b303-dc65f5af7a38?whr=contoso.com
 ```
 
-
 ### 2. アプリケーションで対応
 アプリケーションがIdentity ProviderであるAzure ADへ適切なパラメータを引渡すことで、HRDアクセラレーションが可能です。  
 Office 365やAzure ADアクセスパネルは、HRDアクセラレーションに対応しています。以下、contoso.com というUPNドメインが登録されている Azure AD テナントに対するHRDアクセラレーションの例です。
