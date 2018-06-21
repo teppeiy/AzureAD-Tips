@@ -13,6 +13,7 @@ ms.author: martincoetzer
 ---
 
 
+
 # Five steps to securing your identity infrastructure
 If you're reading this document, you're aware of the significance of security. You likely already carry the responsibility for securing your organization. If you need to convince others of the importance of security, send them to read the latest [Microsoft Security Intelligence report](https://www.microsoft.com/security/intelligence-report). 
 
