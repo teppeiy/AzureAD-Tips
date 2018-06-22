@@ -10,7 +10,7 @@
 <!--
 #### [ゼロトラスト セキュリティモデル](Security/Zero-Trust.md)  
 -->
-#### [会社支給 vs BYOD ?](Security/Device-Posture.md)
+#### [会社支給 vs BYOD ? デバイス状態によるアクセス制御](Security/Device-Posture.md)
 
 ## ADFS  
 #### [なぜADFSよりもAzureADをIdPとすべきか](ADFS/Why-AzureAD.md)
@@ -62,6 +62,9 @@
 -->
 
 ## ツール・その他
+<!--##
+#### [オンプレADを無くしたい](Hybrid/Goodbye-ADDS.md)
+-->
 
 #### [PowerShell環境のセットアップ](Tools/Powershell-Setup.md)
 
