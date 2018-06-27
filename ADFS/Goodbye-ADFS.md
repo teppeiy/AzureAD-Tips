@@ -60,6 +60,7 @@ AD FSを利用する場合、冗長性や災害対策を考慮すると最低 8 
 Ignite 2017 - [Shut the door to cybercrime with Azure Active Directory risk-based identity protection](https://myignite.microsoft.com/sessions/53404?source=sessions)
 
 ## 1.2. AD FSに依存しているサービスを移行
+
 ### 移行可否の判断のための観点
 * アプリ (証明書利用者信頼) 毎のクレームルール    
 AD FSを認証プロバイダー(IdP)としているアプリケーションを棚卸しします。そして、証明書利用者信頼毎の発行変換ルール(Issuance Transformation Rules)がAzure ADで実装可能か確認します。また、発行承認ルール(Issuance Authorization Rules)は、Azure ADの条件付きアクセスへ移行します。
@@ -68,7 +69,11 @@ AD FSを認証プロバイダー(IdP)としているアプリケーションを�
 * デバイス登録サービス (DRS)  
 AD FSのデバイス登録サービスを利用している場合には、Azure AD DRSへ移行します。
 
-### アプリケーション (証明書利用者信頼)の棚卸し  
+### アプリケーション (証明書利用者信頼)
+#### Migrate AD FS on-premises apps to Azure ガイドを参考にします  
+https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/migrate-adfs-apps-to-azure
+
+#### アプリケーションの棚卸し  
 移行判断にはAzure AD開発部門で開発した[AD FS Config Dump](ADFS-Config-Dump.md)により取得したAD FSの設定情報から、証明書利用者信頼の移行判定レポートを提供します。
 
 #### 考慮ポイント
