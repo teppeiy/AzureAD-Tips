@@ -4,7 +4,11 @@
 昨今、増大しているセキュリティインシデントの頻度や影響度は、ITの課題ではなく会社の存続をも脅かす経営課題です。75％のセキュリティインシデントは、IDが盗まれたことに起因しているというデータもあり、IDを守ることは非常に有効な防御策です。にもかかわらず、まだ対策が万全でない企業も多いのが現状です。
 Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策を記載します。
 
-併せて、[Azure AD と AD FS のベスト プラクティス: パスワード スプレー攻撃の防御](https://blogs.technet.microsoft.com/jpazureid/2018/03/19/password-spray/)もご一読いただくことをお奨めいたします。
+併せて、これらもご一読いただくことを強くお奨めいたします。  
+[Five steps to securing your identity infrastructure](
+https://docs.microsoft.com/ja-jp/azure/security/azure-ad-secure-steps)  
+
+[Azure AD と AD FS のベスト プラクティス: パスワード スプレー攻撃の防御](https://blogs.technet.microsoft.com/jpazureid/2018/03/19/password-spray/) 
 
 ## 推奨事項
 * [特権アカウントの保護](#ProtectingPrivilegedAccounts)
