@@ -12,7 +12,7 @@ AD FSを利用する場合、冗長性や災害対策を考慮すると最低 8 
 
 メリットや事例についてはこちらのビデオもご覧ください  
 【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～
-[![【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://www.youtube.com/watch?v=g2mB_EKqi-g/0.jpg)](https://www.youtube.com/watch?v=g2mB_EKqi-g)
+[![【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://img.youtube.com/vi/g2mB_EKqi-g/0.jpg)](https://www.youtube.com/watch?v=g2mB_EKqi-g)
 
 ## AD FS撤廃までのステップ
 1. 準備  
