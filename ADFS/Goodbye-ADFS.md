@@ -4,11 +4,15 @@
 これまで、Office 365等へのシングルサインオンやアクセス制御を AD FS で実施するというケースが主流でしたが、最近ではAzure ADへのシフトが加速化されています。AD FSを利用せずAzure ADでの認証に切り替えるメリットとして以下のような点が挙げられます。
 
 * **よりインテリジェントなセキュリティ対策のメリットを享受**  
-AD FSに対する攻撃対策から解放され、Azure AD のインテリジェントなセキュリティ対策のメリットを享受することができます。たとえば、[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)を利用することになり、様々な攻撃から防御されます。
+AD FSに対する攻撃対策から解放され、Azure AD のインテリジェントなセキュリティ対策のメリットを享受することができます。たとえば、Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)を利用することになり、様々な攻撃から防御されます。
 * [**条件付きアクセス**](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)**で、より高度できめ細かなアクセス制御を実現**  
 複雑な構文を要するAD FSのクレームルールを管理することは手間がかかりますし、変更管理やテストにかかる労力や変更適用までの時間は小さくありません。条件付きアクセスを利用することで、GUIを使った形でのアクセスポリシーを管理できます。また、ADFS では単一アプリケーションとして扱わざるを得なかった Office 365 アプリケーションですが、条件付きアクセスでは各アプリケーション毎に独立したルールを定義することが可能です。
 * **オンプレミス環境の管理から解放**  
 AD FSを利用する場合、冗長性や災害対策を考慮すると最低 8 台（(AD FS 2 台+WAP 2 台)* 2 サイト）また、テスト・QA環境も含めると更に多くのサーバーの管理が必要です。加えて、各種証明書の管理、DMZを含む外部からのアクセスセキュリティの管理、ロードバランサーの管理、セキュリティ更新プログラムの管理等、比較的大きなコストと労力が必要ですが、これらから開放されます。
+
+メリットや事例についてはこちらのビデオもご覧ください  
+【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～
+[![【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://www.youtube.com/watch?v=g2mB_EKqi-g/0.jpg)](https://www.youtube.com/watch?v=g2mB_EKqi-g)
 
 ## AD FS撤廃までのステップ
 1. 準備  
