@@ -129,3 +129,6 @@ AD FS デバイス登録サービスを代替する Azure AD 側の実装方式�
     * 代替ソリューション： https://gallery.technet.microsoft.com/scriptcenter/Password-Expiry-Email-177c3e27
 
 ※その他は、[ハイブリッドID認証方式の比較](/Hybrid/HybridId-Comparison.md)を参照ください。
+
+#### 手順
+[Identity Deployment Guides](https://github.com/Identity-Deployment-Guides/Identity-Deployment-Guides/tree/master/Authentication) にPHS/PTAそれぞれへの移行ガイドを用意しています。
