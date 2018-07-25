@@ -48,14 +48,15 @@ Azure AD でのアクセス制御を行うにあたり、再度自組織で必�
 一般的な除外ケース  
 | 対象 | シナリオ | 対処 (実装) |  
 |---|---|---|
-| 全体管理者 | 管理者自身をロックアウトさせないよう | 全体管理者を全ポリシー除外 (Global Administrator Role を除外する方法はPrivate Preview中) |  
+| 全体管理者 | 管理者自身をロックアウトさせないよう | 全体管理者を全ポリシー除外 (Global Administrator Role を対象外とする（Public Preview） |  
 | Azure AD Connect 同期アカウント| MFA/デバイスポリシー等の制御の影響を受け、同期が失敗するリスクを軽減 | 同期アカウントを全ポリシーから除外 |
-| ゲストアクセス | SPO/Teams等、社外ユーザーにIP制限等でブロックしないよう | ゲストをまとめた動的グループを全ポリシーから除外 (動的グループ無しでGuestを除外する方法はPrivate Preview中) |
+| ゲストアクセス | SPO/Teams等、社外ユーザーにIP制限等でブロックしないよう | ゲストを全ポリシーから対象外とする (そしてゲスト用の別ポリシーを作成する) |
 | MS以外のモバイルアプリ |-|-|
 
 全体管理者等の特権アカウントは、一般ユーザーのポリシーからは除外しますが、別な方法で必ず保護してください。 詳しくは、[Azure ADのセキュリティ強化](Security/Secure-AzureAD.md) を参照。
 
-[動的グループでゲストアカウントを括る方法](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-b2b-dynamic-groups)
+~~[動的グループでゲストアカウントを括る方法](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-b2b-dynamic-groups)~~
+ゲストユーザーが条件付きアクセスの対象として選択可能になりましたので、これをやる必要がなくなりました。
 
 ### 先進認証 (Modern Auth) の有効化
 
