@@ -4,8 +4,8 @@
 Azure AD B2B で招待されたユーザーがメールを紛失した等の対応のため、招待メールを再送する必要がある、というケースがあります。  
 Azure ポータルのゲストユーザーのプロファイルページより再送が可能ですが、ここへ辿りつくまでに時間がかかる、もっと効率的に再送したい、というご要望があります。その際に役に立つPowerShellスクリプトのサンプルを共有します。
 
-
-招待されたユーザーがすでにAzure ADもしくはマイクロソフトアカウントを保持している場合には、招待メールは不要です。これらのユーザーは、招待されたアプリケーションのURLへ直接アクセスする、もしくは、https://myapps.microsoft.com/[InvitingTenantNamed].onmicrosoft.com へ直接アクセスすることで、招待の承諾が可能です。（例: https://myapps.microsoft.com/contoso.onmicrosoft.com）
+### 招待メールは不要なケースも
+招待されたユーザーがすでに Azure AD もしくはマイクロソフトアカウントを保持している場合には、招待メールは不要です。これらのユーザーは、招待されたアプリケーションのURLへ直接アクセスする、もしくは、https://myapps.microsoft.com/[InvitingTenantNamed].onmicrosoft.com へ直接アクセスすることで、招待の承諾が可能です。（例: https://myapps.microsoft.com/contoso.onmicrosoft.com）
 詳しくは、[こちら](
 https://docs.microsoft.com/ja-jp/azure/active-directory/b2b/redemption-experience#redemption-through-a-direct-link)をご覧ください。  
 
