@@ -36,10 +36,11 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/b2b/redemption-experienc
     Gets Azure AD B2B invitation status
 
  .DESCRIPTION
-    This function returns boolean based on the invitation status
+    This function returns boolean based on the invitation status.
+    It returens True if invitation has not been redeemed, otherwise False.
 
  .Parameter InvitedUserEmailAddress
-    Email address of Guest user. Required.
+    The email address of the user being invited. Required.
 
  .Parameter InviteRedirectUrl
     The URL user should be redirected to once the invitation is redeemed. Required.
@@ -55,7 +56,7 @@ function IsPendingAcceptance {
         [Parameter(Mandatory)]
         [string]$InviteRedirectUrl = "https://myapps.microsoft.com/"
     )
-    # Query if there's Pnding Acceptance Guest with specified email
+    # Query if there's Pending Acceptance Guest with specified email
     Write-Host "Checking invitation status for" $InvitedUserEmailAddress
     $r = Get-AzureADUser -filter "Creationtype eq 'invitation' and Mail eq '$InvitedUserEmailAddress'" -all $true | Get-MsolUser | Where-Object { $_.AlternativeSecurityIds.Count -eq 0 }
 
@@ -76,7 +77,7 @@ function IsPendingAcceptance {
     Resend Azure AD B2B invitation based on the invitation status 
 
  .Parameter InvitedUserEmailAddress
-    Email address of Guest user. Required.
+    The email address of the user being invited. Required.
 
  .Parameter InviteRedirectUrl
     The URL user should be redirected to once the invitation is redeemed. Required.
