@@ -33,7 +33,6 @@
 
 #### [条件付きアクセスの適用されるポリシーを把握したい](CA/CA-WhatIf.md)
 
-
 ## ユーザーエクスペリエンス
 
 #### [ユーザーID (UPN) 入力を省きたい](UX/HRD-Acceleration.md)
@@ -60,6 +59,10 @@
 
 #### [アプリケーション管理者権限の委譲](AdminUX/AppAdminRoles.md)
 -->
+
+## Azure AD B2B
+
+#### [Azure AD B2B 招待メールの再送スクリプト](B2B/Resend-Invitation.md)
 
 ## ツール・その他
 <!--##
