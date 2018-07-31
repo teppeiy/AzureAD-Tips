@@ -11,7 +11,7 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/b2b/redemption-experienc
 
 
 
-.ps1ファイルに保存し、ローカル環境等で実行してみてください。
+.ps1ファイルに保存し、ローカル環境等で実行ください。
 
 ``` Powershell
 #Requires –Version 5
