@@ -119,7 +119,7 @@ function ResendInvitation {
 # Login to Azure AD tenant
 Connect-AzureAD
 
-# Login to Azure AD v1 if -Force switch is not used. This is needed for IsPendingAcceptance function.
+# Login to Azure AD v1 if -Force switch for ResendInvitation function is not used. This is needed for IsPendingAcceptance function.
 Connect-MsolService
 
 
