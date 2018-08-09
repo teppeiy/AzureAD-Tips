@@ -116,6 +116,8 @@ function ResendInvitation {
     }
 }
 
+# Login into Azure AD tenant
+Connect-AzureAD
 
 # Initialize parameters accordingly
 $InviteRedirectUrl = "https://myapps.microsoft.com"
