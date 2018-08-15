@@ -63,6 +63,7 @@
 ## Azure AD B2B
 
 #### [Azure AD B2B 招待メールの再送スクリプト](B2B/Resend-Invitation.md)
+#### [異なる Azure AD テナント間の連絡先交換の実装方法](B2B/Tenant-collab-GALSync.md)
 
 ## ツール・その他
 <!--##
