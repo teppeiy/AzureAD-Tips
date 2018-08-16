@@ -1,6 +1,6 @@
 # Azure AD Tips
 
-## セキュリティ
+## セキュリティ 
 
 #### [Azure ADのセキュリティ強化](Security/Secure-AzureAD.md)
 
