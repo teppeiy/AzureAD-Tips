@@ -18,6 +18,7 @@ https://docs.microsoft.com/ja-jp/azure/security/azure-ad-secure-steps)
     * パスワードハッシュ同期の有効化
 * [パスワードポシリーの強化](#StrengethenPasswordPolicy)
     * セルフサービスパスワードリセットの有効化
+* [レガシー認証プロトコルのブロック](Block-Legacy-Auth.md)
 * [AD FSの保護](#ProtectADFS)
     * AD FS Extranet Lockout Protection の有効化
     * Azure AD Connect Health for AD FS の有効化
@@ -95,6 +96,10 @@ AD FSの廃止については、[こちら](/ADFS/Goodbye-ADFS.md)も参照く�
     Azure AD と Microsoft アカウントでは、よく攻撃に利用されているパスワードを保持しています。そして、それらのパスワードをユーザーが設定できないようなメカニズムを持っています。
     この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。  
     注；同期IDを利用している場合、ユーザーが直接オンプレミスのADでパスワードを更新した場合には、よく利用される脆弱なパスワード禁止ポリシーは適用されません。今後の機能拡張において、オンプレミスのADでも禁止ポリシーが適用できるような仕組みを検討中です。
+## レガシー認証プロトコルのブロック
+[こちら](Block-Legacy-Auth.md)を参考ください。
+
+
 ## <a id="ProtectADFS"> </a>AD FSの保護
 * ### [AD FS Extranet Lockout Protection](https://docs.microsoft.com/ja-jp/windows-server/identity/ad-fs/operations/configure-ad-fs-extranet-lockout-protection) の有効化  
     AD FS利用の場合、この機能を有効化することにより、AD FSへのブルートフォース攻撃等への対策になります。  
