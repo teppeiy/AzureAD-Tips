@@ -12,9 +12,10 @@
 -->
 #### [会社支給 vs BYOD ? デバイス状態によるアクセス制御](Security/Device-Posture.md)
 
-## ADFS  
+## ADFS
+<!--
 #### [なぜADFSよりもAzureADをIdPとすべきか](ADFS/Why-AzureAD.md)
-
+-->
 #### [ADFS廃止のすすめ](ADFS/Goodbye-ADFS.md)
 
 <!--#### [クレームルールからCAへの移行](ADFS/ClaimRule-CA-Migraion.md)-->

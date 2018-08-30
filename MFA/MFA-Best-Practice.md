@@ -6,7 +6,6 @@
 一つ忘れたとしても業務が続けられます。
 2. Authenticator Appを利用  
 一番簡単で信頼性の高い方法
-3. Windows Hello for BusinessはMFA
+3. Windows Hello for BusinessはMFAという扱い
 4. ユーザーへMFAを強制するのではなく、条件付きアクセスを利用  
     管理者アカウントに対しては、如何なる条件においてもMFAを適用
-5. 
