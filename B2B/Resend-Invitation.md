@@ -42,19 +42,14 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/b2b/redemption-experienc
  .Parameter InvitedUserEmailAddress
     The email address of the user being invited. Required.
 
- .Parameter InviteRedirectUrl
-    The URL user should be redirected to once the invitation is redeemed. Required.
-
  .Example
-   $TrueOrFalse = IsPendingAcceptance -InvitedUserEmailAddress "foo@contoso.com" -InviteRedirectUrl "https://myapps.microsoft.com"
+   $TrueOrFalse = IsPendingAcceptance -InvitedUserEmailAddress "foo@contoso.com"
 #>
 function IsPendingAcceptance {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory)]
-        [string]$InvitedUserEmailAddress,
-        [Parameter(Mandatory)]
-        [string]$InviteRedirectUrl = "https://myapps.microsoft.com/"
+        [string]$InvitedUserEmailAddress
     )
     # Query if there's Pending Acceptance Guest with specified email
     Write-Host "Checking invitation status for" $InvitedUserEmailAddress
@@ -106,7 +101,7 @@ function ResendInvitation {
         New-AzureADMSInvitation -SendInvitationMessage $true -InvitedUserEmailAddress $InvitedUserEmailAddress -InviteRedirectUrl $InviteRedirectUrl
     }
     else{
-        if(IsPendingAcceptance -InvitedUserEmailAddress $InvitedUserEmailAddress -InviteRedirectUrl $InviteRedirectUrl) { # Found
+        if(IsPendingAcceptance -InvitedUserEmailAddress $InvitedUserEmailAddress) { # Found
             Write-Host -ForegroundColor Green "Resending invitation...."
             New-AzureADMSInvitation -SendInvitationMessage $true -InvitedUserEmailAddress $InvitedUserEmailAddress -InviteRedirectUrl $InviteRedirectUrl
         }
