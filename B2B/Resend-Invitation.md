@@ -55,8 +55,8 @@ function IsPendingAcceptance {
     Write-Verbose -Message "Checking invitation status for $InvitedUserEmailAddress"
     $u = Get-AzureADUser -filter "Creationtype eq 'invitation' and Mail eq '$InvitedUserEmailAddress'"
 
-    if($u -ne $null){
-        if($u.ExtensionProperty.userState -eq 'PendingAcceptance') # Found
+    if($u -ne $null){ # Guest account found
+        if($u.ExtensionProperty.userState -eq 'PendingAcceptance') 
         {
             Write-Verbose -Message "$InvitedUserEmailAddress has been invited but not accepted the invitation. Returning TRUE"
             return $true
