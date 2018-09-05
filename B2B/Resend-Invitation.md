@@ -53,14 +53,20 @@ function IsPendingAcceptance {
     )
     # Query if there's Pending Acceptance Guest with specified email
     Write-Host "Checking invitation status for" $InvitedUserEmailAddress
-    $r = Get-AzureADUser -filter "Creationtype eq 'invitation' and Mail eq '$InvitedUserEmailAddress'" -all $true | Get-MsolUser | Where-Object { $_.AlternativeSecurityIds.Count -eq 0 }
+    $u = Get-AzureADUser -filter "Creationtype eq 'invitation' and Mail eq '$InvitedUserEmailAddress'"
 
-    if($r.count -gt 0) # Found
-    {
-        Write-Host $InvitedUserEmailAddress " has not accepted the invitation. Returning TRUE"
-        return $true
+    if($u -ne $null){
+        if($u.ExtensionProperty.userState -eq 'PendingAcceptance') # Found
+        {
+            Write-Verbose -Message "$InvitedUserEmailAddress has been invited but not accepted the invitation. Returning TRUE"
+            return $true
+        }
+        else{
+            Write-Verbose -Message "$InvitedUserEmailAddress has been invited and accepted the invitation. Returning FALSE"
+            return $false
+        }
     }
-    Write-Host $InvitedUserEmailAddress " has accepted the invitation or has never been invited. Returning FALSE"
+    Write-Verbose -Message "$InvitedUserEmailAddress has never been invited. Returning FALSE"
     return $false
 }
 
@@ -113,10 +119,6 @@ function ResendInvitation {
 
 # Login to Azure AD tenant
 Connect-AzureAD
-
-# Login to Azure AD v1 if -Force switch for ResendInvitation function is not used. This is needed for IsPendingAcceptance function.
-Connect-MsolService
-
 
 # Initialize parameters accordingly
 $InviteRedirectUrl = "https://myapps.microsoft.com"
