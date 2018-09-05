@@ -52,7 +52,7 @@ function IsPendingAcceptance {
         [string]$InvitedUserEmailAddress
     )
     # Query if there's Pending Acceptance Guest with specified email
-    Write-Host "Checking invitation status for" $InvitedUserEmailAddress
+    Write-Verbose -Message "Checking invitation status for $InvitedUserEmailAddress"
     $u = Get-AzureADUser -filter "Creationtype eq 'invitation' and Mail eq '$InvitedUserEmailAddress'"
 
     if($u -ne $null){
