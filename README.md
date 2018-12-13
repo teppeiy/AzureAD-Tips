@@ -6,6 +6,8 @@
 
 #### [テナントのセキュリティの脆弱性を可視化する](Security/Discover-vulnerability.md) 
 
+#### [サービスアカウントのセキュリティプラクティス](Security/Service-Account-Best-Practice.md)
+
 #### [レガシー認証をブロックする](Security/Block-Legacy-Auth.md)  
 <!--
 #### [ゼロトラスト セキュリティモデル](Security/Zero-Trust.md)  
