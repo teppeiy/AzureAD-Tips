@@ -19,7 +19,7 @@ Azure AD で認証保護された Microsoft Graph、API、他サービスにア�
 アクセスされる側のリソースが Azure 上で運用されている場合には、Managed Identity を利用します。この仕組を利用することで、アプリケーションに資格情報を埋め込むことなく安全にリソースアクセスが可能です。Azure サブスクリプションを対象とした Azure AD の無料の機能ですので、追加コストはかかりません。
    
 ### 2. [サービスプリンシパル](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/app-objects-and-service-principals) を利用した証明書認証を利用する
-他のクラウドサービス（AWS 等）にアクセスされる側のリソースが運用されている場合には Managed Identity が利用できないため、サービスプリンシパルを利用します。  
+他のクラウドサービス（AWS 等）にアクセスされる側のリソースが運用されている場合には Managed Identity が利用できないため、サービスプリンシパルを利用します。こちらも追加コストはかかりません。  
 サービスプリンシパルを認証する方式がいくつか選択できますが、[証明書を利用した方式](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/howto-authenticate-service-principal-powershell)を利用します。
 ClientId/Secret での認証も可能ですが、これらをアプリケーションに埋め込むことは、ユーザーアカウントを利用して資格情報（ID/パスワード）を埋め込むことと同様に、漏洩リスクが高いため、これは避けるべき方法です。
 
