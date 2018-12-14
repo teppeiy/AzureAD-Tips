@@ -23,12 +23,13 @@ Azure AD 条件付きアクセスでは、信頼されたデバイスであれ�
 |オンプレミスADドメイン参加していること（[ハイブリッドAzure AD 参加](https://docs.microsoft.com/ja-jp/azure/active-directory/device-management-hybrid-azuread-joined-devices-setup)）<br>= GPO が適用されているであろう|Windows 7/8.1/10|
 |Intune のポリシーに準拠していること|iOS, Android, Windows 10, Windows Phone, MacOS|
 |~~SCCMのポリシーに準拠していること<br>（[Intune Hybrid](https://docs.microsoft.com/ja-jp/sccm/mdm/deploy-use/setup-hybrid-mdm)）~~<br>2019年9月1日にリタイア予定|~~MDM: iOS, Android, Windows 10, Windows Phone, MacOS <br> SCCM Agent: Windows 7/8.1/10~~
-|Intune/SCCMのポリシーに準拠していること<br>（[Co-Management](https://docs.microsoft.com/ja-jp/sccm/core/clients/manage/co-management-overview)）|Windows 10|
-|その他MDMのポリシーに準拠していること|Windows 10|
+|Intune/SCCM のポリシーに準拠していること<br>（[Co-Management](https://docs.microsoft.com/ja-jp/sccm/core/clients/manage/co-management-overview)）|Windows 10|
+|その他 MDM のポリシーに準拠していること|Windows 10|
 
 注意点： Azure AD 参加していることだけでは、信頼のされたデバイス扱いにはならない
 Windows 10 を Azure AD 参加させたとしても、Azure AD 単体でセキュリティポリシーを適用するメカニズムを持っていないため、併せてIntune 等の MDM 管理下におくことが必要です。
 
+詳しくは、Azure AD ウェビナー：[IP ベースのアクセス制御から脱却してよりセキュアな環境を構築しよう](http://aka.ms/ztnwebinar) をご覧ください。
 
 ## 会社の規定により、BYOD 利用を制限したい場合
 * 会社の把握しているデバイス利用に制限したい  
