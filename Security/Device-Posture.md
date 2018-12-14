@@ -38,4 +38,4 @@ PCの場合には、オンプレミス AD ドメインに参加することを�
 * BYOD 利用許可により、従業員からの訴訟リスクが上がる  
 従業員が個人所有デバイスを Intune に登録し、業務メールを利用していたとします。子供のいたずら等で、PIN 入力を規定回数以上に失敗し、個人のデータ（たとえば大切な子供の写真等）がワイプされた場合、企業は訴訟されるかもしれません。そういったリスクを避けるには、
 [Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) が有効かもしれません。
-[Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) を利用すると、従業員がサービス（Exchange Online等）へアクセスする際、使用条件の同意を集めることが可能です。
+[Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) を利用すると、従業員がサービス（Exchange Online等）へアクセスする際、使用条件の同意が必要になります。
