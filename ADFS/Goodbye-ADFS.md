@@ -120,15 +120,16 @@ AD FS デバイス登録サービスを代替する Azure AD 側の実装方式�
 
 #### 認証切り替えに際した考慮ポイント
 パスワードハッシュ同期を有効化し、認証をAzure ADにて実施するよう切り替えた場合、以下のような制限事項があります。マイクロソフトは、これらを解消するための機能追加を検討中です。これらの制限事項が解消されるまでAD FS撤廃が難しいケースもあるかもしれませんが、前述した機能の移行は事前準備として実施可能であり、沢山のメリットをもたらすため実施を強く推奨します。
-* オンプレミスのADでパスワード失効後でも、Azure ADのアカウントでサインイン可能[(Note)](/Hybrid/Password-Expiration.md)
-* オンプレミスのADでアカウントロックアウト後でも、Azure ADのアカウントでサインイン可能
-* オンプレミスのADでアカウント無効化後、それがAzure ADへ反映されるまで最大30分(同期サイクルの規定値)かかる
-* ~~レガシー認証のブロックが限定的：Outlook2010等の古いOfficeクライアントからの認証をブロックするには、Exchange側でコントロール（社内/社外とわずブロック等）する必要がある~~
-* スマートカード認証等のクライアント証明書を使った認証はAD FSのみでサポート  
-* パスワード期限切れがWin10やOfficeポータル上に通知されない
+* パスワードの期限切れについて - 問題になることは殆どありません。詳しくは、[こちら](/Hybrid/Password-Expiration.md)をご参考ください。
+  * オンプレミスのADでパスワード失効後でも、Azure ADのアカウントでサインイン可能。
+  * パスワード期限切れが Win10 や Office ポータル上に通知されない
     * 代替ソリューション： https://gallery.technet.microsoft.com/scriptcenter/Password-Expiry-Email-177c3e27
-
-※その他は、[ハイブリッドID認証方式の比較](/Hybrid/HybridId-Comparison.md)を参照ください。
+* オンプレミスの AD でアカウント無効化後、それが Azure AD へ反映されるまで最大30分(同期サイクルの規定値)かかる。
+* オンプレミスの AD でアカウントロックアウト後でも、Azure ADのアカウントでサインイン可能。
+* * スマートカード認証等のクライアント証明書を使った認証はAD FSのみでサポート。
+* ~~レガシー認証のブロックが限定的：Outlook2010等の古いOfficeクライアントからの認証をブロックするには、Exchange側でコントロール（社内/社外とわずブロック等）する必要がある~~
+* その他は、[ハイブリッドID認証方式の比較](/Hybrid/HybridId-Comparison.md)を参照ください。
 
 #### 手順
-[Identity Deployment Guides](https://github.com/Identity-Deployment-Guides/Identity-Deployment-Guides/tree/master/Authentication) にPHS/PTAそれぞれへの移行ガイドを用意しています。
+[AD FS からパスワードハッシュ同期認証(PHS)への移行ガイド](https://docs.microsoft.com/ja-jp/azure/active-directory/hybrid/plan-migrate-adfs-password-hash-sync)   
+[AD FS からパススルー認証(PTA)への移行ガイド](https://docs.microsoft.com/ja-jp/azure/active-directory/hybrid/plan-migrate-adfs-pass-through-authentication)
