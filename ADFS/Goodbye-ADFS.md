@@ -28,16 +28,16 @@
 ## 1.1. パスワードハッシュ同期の有効化（認証の切り替え無し）
 既存のフェデレーション（実際に認証する場所はAD FS）設定に変更を加えず、オンプレミスADのパスワードハッシュのハッシュをAzure ADへ同期します。繰り返しになりますが、**この時点で認証フローが変更されることはありません。つまり、これまで通り AD FS を利用した認証が維持されます。**  
 パスワードハッシュ同期は、AD FS を無くすためのステップの一つですが、2つの大きなメリットがあります。
-1. [漏洩したID検知レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) によるセキュリティ向上  
+1. [漏洩した資格情報検知レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) によるセキュリティ向上  
 マイクロソフトは、複数のソースから漏洩した資格情報一覧を継続的に取得しています。そのリストと Azure AD 利用者のアカウントを機械的に突き合わせることにより、漏洩した資格情報を検知しレポートを提供します。企業の管理者は、漏洩しているアカウントを知ることができ、被害を拡大させないような対策（パスワードをリセットする等）を実施できます。
-2. ディザスタリカバリへの対策  
-フェデレーション環境において、AD FS/WAPが利用できなくなった際には、Office 365等Azure ADに認証を依存しているサービスが利用できなくなります。実際にAD FSがPetyaに感染した企業において、パスワードハッシュ同期をしていた企業はAD FSからAzure ADへの認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FSを構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
+2. ディザスタリカバリの対策  
+フェデレーション環境において、AD FS/WAP が利用できなくなった際には、Office 365 等 Azure AD に認証を依存しているサービスが利用できなくなります。実際に AD FS が Pety aに感染した企業において、パスワードハッシュ同期をしていた企業は AD FS から Azure AD への認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FS を構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 
-#### パスワードハッシュをAzure ADに同期することの安全性について
-パスワードハッシュと言えども、Azure ADに資格情報を同期することに懸念を持つ方々も少なくありません。その場合、同期プロセスや[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)の説明が助けになるかもしれません。  
+#### パスワードハッシュを Azure AD に同期することの安全性について
+パスワードハッシュと言えども、Azure AD に資格情報を同期することに懸念を持つ方々(情報セキュリティ部門等)も少なくありません。その場合、同期プロセスや[Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout) の説明が助けになるかもしれません。  
 
 #### パスワードハッシュ同期のメカニズム
-パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルト+ストレッチング+ハッシュといったテクニックを使い、攻撃リスクを軽減するプロセスを通してAzure ADへ同期します。
+パスワードハッシュ同期を有効化すると、Azure AD Connectは、元々のパスワードハッシュをソルト + ストレッチング + ハッシュといったテクニックを使い、攻撃リスクを軽減するプロセスを通してAzure ADへ同期します。
 * ソルト: ハッシュ化前に対象文字列にランダムな文字列を不可する。レインボーテーブルによる探索に対する防御策の一つ
 * ストレッチング: 何度もハッシュ化をすることにより、攻撃者の解析コストを高める（時間の長期化）防御策の一つ
 
@@ -46,19 +46,19 @@
     [ハッシュとソルト、ストレッチングを正しく理解する：本当は怖いパスワードの話](http://www.atmarkit.co.jp/ait/articles/1110/06/news154.html)
 
 
-具体的には、ADに保存されているMD4でハッシュ化されたパスワードにsaltを付加、[PBKDF2](https://www.ietf.org/rfc/rfc2898.txt)関数で計算後、[HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx)
+具体的には、ADに保存されているMD4でハッシュ化されたパスワードにソルトを付加、[PBKDF2](https://www.ietf.org/rfc/rfc2898.txt)関数で計算後、[HMAC-SHA256](https://msdn.microsoft.com/library/system.security.cryptography.hmacsha256.aspx)
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
 #### 手順:
-1. [Azure AD Connectの構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
+1. [Azure AD Connect の構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
 2. [漏洩した資格情報検知レポートを確認する](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-reporting-security-user-at-risk)
 
-#### Azure AD のパスワード保護
-* Smart Lockout
-ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、Microsoft は、[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections) を使ってそのユーザー アカウントをロックします。
+#### Azure AD に対する攻撃への保護
+* [Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout)  
+ユーザーのパスワードがサイバー犯罪者によってハッキングされようとしている可能性があることを Azure AD が検出すると、[Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout) 機能が働くことで、そのユーザー アカウントをロックします。
 
 #### 更にセキュリティレベルを上げる
-* [Identify Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection) によるリスクベースでの条件付きアクセスの有効化
+* [Identify Protection](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection) (Azure AD Premium P2 の機能) による自動応答機能を利用することで、たとえば、漏洩した資格情報が見つかると、そのアカウントを利用してログインをブロックしたり、パスワード変更を強制するといったような自動対応が可能になります。
 
 
 参考:  
@@ -66,35 +66,35 @@ Ignite 2017 - [Shut the door to cybercrime with Azure Active Directory risk-base
 
 ## 1.2. AD FSに依存しているサービスを移行
 
-### 移行可否の判断のための観点
-* アプリ (証明書利用者信頼) 毎のクレームルール    
-AD FSを認証プロバイダー(IdP)としているアプリケーションを棚卸しします。そして、証明書利用者信頼毎の発行変換ルール(Issuance Transformation Rules)がAzure ADで実装可能か確認します。また、発行承認ルール(Issuance Authorization Rules)は、Azure ADの条件付きアクセスへ移行します。
-* ライセンス   
-移行に際して必要なライセンスを保持しているか確認します。条件付きアクセスの利用には、Azure AD Premium P1が必要になります。
+### 移行対象の代表的なサービス
+* アプリケーション (証明書利用者信頼)  
+AD FS　を認証プロバイダー(IdP)としているアプリケーションです。ほぼ例外なく、AD FS の機能の移行対象となる Azure AD そのものが証明書利用者信頼で連携されていますが、それ以外のものがあるか確認し、移行戦略を立てます。
+* アクセス制御
+これは上記したアプリケーションと一緒に考慮する必要があります。発行承認ルール (Issuance Authorization Rules) 、いわゆるクレームルールを Azure AD の条件付きアクセスへ移行していきます。
 * デバイス登録サービス (DRS)  
-AD FSのデバイス登録サービスを利用している場合には、Azure AD DRSへ移行します。
+この機能が利用されているケースはとても少ないですが、AD FS のデバイス登録サービスを利用している場合には、Azure AD DRSへ移行します。
 
 ### アプリケーション (証明書利用者信頼)
+AD FS　を認証プロバイダー(IdP)としているアプリケーションを棚卸しします。そして、証明書利用者信頼毎の発行変換ルール (Issuance Transformation Rules) が Azure AD で実装可能か確認します。
 #### Migrate AD FS on-premises apps to Azure ガイドを参考にします  
 https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/migrate-adfs-apps-to-azure
 
-#### アプリケーションの棚卸し  
-移行判断にはAzure AD開発部門で開発した[AD FS Config Dump](ADFS-Config-Dump.md)により取得したAD FSの設定情報から、証明書利用者信頼の移行判定レポートを提供します。
-
 #### 考慮ポイント
+* ライセンス   
+移行に際して必要なライセンスを保持しているか確認します。条件付きアクセスの利用には、Azure AD Premium P1が必要になります。
 * トークンに関する要件、発行変換ルール  
 Azure ADの継続的な機能向上に伴い、AD FSでしか実現できないシナリオは急速に減りつつあります。
     * 最近のアップデートで、トークンの暗号化がサポートされています
     * SAML1.1トークンがサポートされました
     * 近日中に、ToLowercaseやRegexReplaceを利用した動的なクレーム発行もされます
 
-* クレーム発行許可ルール  
-アクセス制御をAzure ADの条件付きアクセスを利用することで、更に柔軟で管理のしやすいアクセス制御をすることが可能です。移行における大部分の労力はクレームルール⇒条件付きアクセスの移行に費やされることになります。
+* アクセス制御
+アクセス制御を、AD FS のクレーム発行許可ルールから、Azure AD の条件付きアクセスを利用することで、更に柔軟で管理のしやすいアクセス制御をすることが可能です。移行における大部分の労力はクレームルール⇒条件付きアクセスの移行に費やされることになります。
 
 ### アクセス制御：承認要求規則から[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)へ移行
 メリット
 * より柔軟なアクセス制御
-* リスクベースの条件付きアクセスの適用(要P2ライセンス)  
+* リスクベースの条件付きアクセスの適用(Identity Protection)  
 
 #### 考慮ポイント
 レガシープロトコルの条件付きアクセス対応 → 対応済み  
