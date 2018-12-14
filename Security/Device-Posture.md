@@ -26,16 +26,16 @@ Azure AD 条件付きアクセスでは、信頼されたデバイスであれ�
 |Intune/SCCMのポリシーに準拠していること<br>（[Co-Management](https://docs.microsoft.com/ja-jp/sccm/core/clients/manage/co-management-overview)）|Windows 10|
 |その他MDMのポリシーに準拠していること|Windows 10|
 
-注意点： Azure AD参加していることだけでは、信頼のされたデバイス扱いにはならない
-Windows 10 を Azure AD参加させたとしても、Azure AD 単体でセキュリティポリシーを適用するメカニズムを持っていないため、併せてIntune等の管理下におくことが必要です。
+注意点： Azure AD 参加していることだけでは、信頼のされたデバイス扱いにはならない
+Windows 10 を Azure AD 参加させたとしても、Azure AD 単体でセキュリティポリシーを適用するメカニズムを持っていないため、併せてIntune 等の MDM 管理下におくことが必要です。
 
 
-## 会社の規定により、BYOD利用を制限したい場合
+## 会社の規定により、BYOD 利用を制限したい場合
 * 会社の把握しているデバイス利用に制限したい  
-[Intune の登録制限](https://docs.microsoft.com/ja-jp/intune/enrollment-options)を利用します。IMEI等のデバイス識別番号を管理者が予め登録し、そのデバイスのみをIntuneの管理下におくということが可能です。BYODを許可する場合においても、利用者が申請ベースでIMEIを事前に登録する（マニュアル作業）ことも可能です。
-PCの場合には、オンプレミスADドメインに参加することを会社支給PCのみに制限することで実現可能です。
+[Intune の登録制限](https://docs.microsoft.com/ja-jp/intune/enrollment-options)を利用します。IMEI 等のデバイス識別番号を管理者が予め登録し、そのデバイスのみをIntuneの管理下におくということが可能です。BYODを許可する場合においても、利用者が申請ベースでIMEIを事前に登録する（マニュアル作業）ことも可能です。
+PCの場合には、オンプレミス AD ドメインに参加することを会社支給PCのみに制限することで実現可能です。
 
-* BYOD利用許可により、従業員からの訴訟リスクが上がる  
-従業員が深く考えずに個人所有デバイスをIntuneに登録し、業務メールを利用していたとします。子供のいたずら等で、PIN入力を規定回数以上に失敗し、個人のデータ（たとえば大切な子供の写真等）がワイプされた場合、企業は訴訟されるかもしれません。そういったリスクを避けるには、
+* BYOD 利用許可により、従業員からの訴訟リスクが上がる  
+従業員が個人所有デバイスを Intune に登録し、業務メールを利用していたとします。子供のいたずら等で、PIN 入力を規定回数以上に失敗し、個人のデータ（たとえば大切な子供の写真等）がワイプされた場合、企業は訴訟されるかもしれません。そういったリスクを避けるには、
 [Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) が有効かもしれません。
-[Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) を利用すると、従業員がサービス（Exchange Online等）へアクセスする際、使用条件の許諾を集めることが可能です。
+[Azure AD Terms of Use](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-tou) を利用すると、従業員がサービス（Exchange Online等）へアクセスする際、使用条件の同意を集めることが可能です。
