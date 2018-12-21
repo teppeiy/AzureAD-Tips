@@ -2,7 +2,10 @@
 
 ## 概要
 昨今、増大しているセキュリティインシデントの頻度や影響度は、ITの課題ではなく会社の存続をも脅かす経営課題です。75％のセキュリティインシデントは、IDが盗まれたことに起因しているというデータもあり、IDを守ることは非常に有効な防御策です。にもかかわらず、まだ対策が万全でない企業も多いのが現状です。
-Azure AD等、クラウド認証基盤で必ずすべきセキュリティ対策を記載します。
+クラウド認証基盤で必ずすべきセキュリティ対策を記載します。
+
+[ID セキュリティ スコア (Identity Secure Score)](https://docs.microsoft.com/ja-jp/azure/active-directory/fundamentals/identity-secure-score) を利用すると、実施すべき対策やその状態を定量的に可視化することが可能です。
+
 
 併せて、これらもご一読いただくことを強くお奨めいたします。  
 [Five steps to securing your identity infrastructure](
@@ -38,7 +41,7 @@ https://docs.microsoft.com/ja-jp/azure/security/azure-ad-secure-steps)
     ほとんどの企業では、全体管理者は多くても2～3アカウントで十分に事足りるはずです。また、必要な管理作業を遂行することができる最小の権限を[管理者ロール](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-assign-admin-roles-azure-portal)の中から割り当てることで、特権アカウントの意図しない利用や不正な利用のリスクを最小限にします。PIMのレポートを利用することで、最小限の権限を最小限のユーザーへ割り当てるための棚卸しが効率的になります。
 
 * ### [多要素認証(MFA)](https://docs.microsoft.com/ja-jp/azure/multi-factor-authentication/multi-factor-authentication)を強制
-    特権アカウントグループを作成し、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
+    [ベースラインの保護](https://docs.microsoft.com/ja-jp/azure/active-directory/conditional-access/baseline-protection) を有効にします。また、その他の特権アカウントに対しても、[条件付きアクセス](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)を利用してMFAを強制します。  
     もしくは、個々の特権アカウントに対し、MFAを強制します。  
     PIMを有効にすることでMFAが強制されることになりますが、もしP2ライセンスの購入が難しい場合には、必ずMFAを有効にすることを強くお奨めします。
 
@@ -71,7 +74,7 @@ AD FS等を利用するフェデレーション環境においても、パスワ
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
 #### Smart Lockout (非フェデレーション環境において)
-Azure ADの基本機能である[Smart Lockout](https://docs.Microsoft.com/ja-jp/azure/active-directory/active-directory-secure-passwords#azure-ad-password-protections)は、ブルートフォース攻撃等への防御策です。
+Azure ADの基本機能である[Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout) は、ブルートフォース攻撃等への防御策です。
 既定のロックアウトしきい値は試行失敗 10 回で、既定のロックアウト期間は 60 秒です。
 また、スマート ロックアウトは正規のユーザーによるサインインと攻撃者によるサインインを区別し、ほとんどの場合は攻撃者のみをロックアウトします。 この機能は、攻撃者の悪意によって正規のユーザーがロックアウトされるのを防ぎます。 正規のユーザーと攻撃者を区別するには、過去のサインイン動作、ユーザーのデバイスとブラウザー、その他のシグナルが使われます。 アルゴリズムは常に改善されています。
 
@@ -97,7 +100,7 @@ AD FSの廃止については、[こちら](/ADFS/Goodbye-ADFS.md)も参照く�
     この機能は、[セルフサービスパスワードリセット](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-passwords-overview)を有効化することにより利用可能になります。  
     注；同期IDを利用している場合、ユーザーが直接オンプレミスのADでパスワードを更新した場合には、よく利用される脆弱なパスワード禁止ポリシーは適用されません。今後の機能拡張において、オンプレミスのADでも禁止ポリシーが適用できるような仕組みを検討中です。
 ## レガシー認証プロトコルのブロック
-[こちら](Block-Legacy-Auth.md)を参考ください。
+[こちら](https://docs.microsoft.com/ja-jp/azure/active-directory/conditional-access/block-legacy-authentication) を参考ください。
 
 
 ## <a id="ProtectADFS"> </a>AD FSの保護
