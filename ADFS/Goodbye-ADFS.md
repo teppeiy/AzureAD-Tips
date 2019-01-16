@@ -49,7 +49,7 @@
 を使ってキー付きハッシュアルゴリズムで1,000回ものハッシュ化を実施する、といったような一連のプロセスです。詳しくは[こちらのドキュメント](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#how-password-synchronization-works)を参照ください。  
 
 #### 手順:
-1. [Azure AD Connect の構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/connect/active-directory-aadconnectsync-implement-password-synchronization#enable-password-synchronization)
+1. [Azure AD Connect の構成ウィザードを利用し、パスワードハッシュ同期を有効化する](https://docs.microsoft.com/ja-jp/azure/active-directory/hybrid/plan-migrate-adfs-password-hash-sync#implementing-your-solution)
 2. [漏洩した資格情報検知レポートを確認する](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-reporting-security-user-at-risk)
 
 #### Azure AD に対する攻撃への保護
@@ -99,9 +99,9 @@ AD FSでクレームルールを利用し、場所ベースのアクセス制御
 #### アクセス制御の移行戦略
 既存ユーザーへの影響を最小化しながら、効率的にアクセス制御を移行する方法について紹介します。  
 * 準備
-  * オンプレミスのセキュリティグループ（Migration Group とします）を作成し、それを Azure AD へ同期しておきます
+  * オンプレミスのセキュリティグループ（Migration Group とします）を作成し、それを Azure AD へ同期しておきます。
   * Migration Group は、AD FS のクレームルールをバイパスするように設定し、AD FS によるアクセス制御の影響を受けないようにしておきます。
-    * 既にクレームルールをバイパスされるグループが存在している場合は Mibration Group をそのグループのメンバーとして入れ子にすることで、既存の AD FS のクレームルールを変更する必要がなくなります。
+    * 既にクレームルールをバイパスされるグループが存在している場合は Migration Group をそのグループのメンバーとして入れ子にすることで、既存の AD FS のクレームルールを変更する必要がなくなります。
   * 条件付きアクセスの対象として、Migration Group を選択しておきます。
 * テスト・移行
   * Migration Group へ一部のユーザーを追加し、条件付きアクセスポリシーで意図されたアクセス制御が実現できているか検証します
