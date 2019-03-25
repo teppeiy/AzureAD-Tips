@@ -29,6 +29,8 @@
 以下、それぞれについて、クラウド移行後のイメージや推奨・考慮事項について説明します。
 
 ## U（ユーザー）
+
+<!-- 
 ### オンプレ AD の役割
 
 * ユーザー情報（資格情報を含む）の保持  
@@ -46,7 +48,7 @@
 もし、人事システム (HCM) に Workday や、SuccessFactors を利用している場合、Azure AD の [インバウンドプロビジョニング機能](https://docs.microsoft.com/ja-jp/azure/active-directory/saas-apps/workday-inbound-tutorial) を利用することで、これを実現可能ですが移行過渡期においては、オンプレ AD も併用する必要があるため、何らかの形でオンプレ AD へのユーザープロビジョニングも必要になるはずです。例えば以下のようなフローが実現できればベストなのかもしれませんが、これは将来的にサポートするシナリオとして検討されている段階です。
  >人事システム → Azure AD (IDM) → オンプレ AD
 
-
+-->
 ## D (デバイス)
 
 ### オンプレ AD の役割
@@ -88,7 +90,7 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/devices/overview) をご
   * 調達要件として、モダン認証（OpenID Connect、SAML、WS-Federation）対応を必須とした上で、Azure AD と認証連携します。AD FS 等のオンプレ AD に依存する認証基盤を利用しないようにします。
 * 既存のアプリケーション
   * アプリケーション整理し、ビジネスニーズに応じて取捨選択をします。自社ビジネスの戦略領域ではないビジネス要件については、可能な限りクラウドサービスの利用にシフトしていきます。例：ファイルサーバーから SharePoint Online 等。
-  * 戦略領域である自社開発・運用のアプリケーションについては、改修ライフサイクルに応じてモダン認証に対応を進め、Azure AD と認証連携します。
+  * 戦略領域である自社開発・運用のアプリケーションについては、改修ライフサイクルに応じてモダン認証に対応を進め、Azure AD と認証連携します。モダン認証対応については、[アプリケーションのモダン認証対応方法](MA-Apps.md) をご覧ください。
 * 新規・既存アプリケーション共通
-  * モダン認証対応は、[アプリケーションのモダン認証対応方法](MA-Apps.md) をご覧ください。
+  * モダン認証対応については、[アプリケーションのモダン認証対応方法](MA-Apps.md) をご覧ください。
   * モダン認証に対応できないパッケージ製品、LDAP 等の古いプロトコルにたよざるをえないものについては、Domain Controller as a Service である、[Azure AD Domain Services](https://docs.microsoft.com/ja-jp/azure/active-directory-domain-services/active-directory-ds-overview) との連携を検討します。
