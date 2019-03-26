@@ -1,4 +1,4 @@
-# Web アプリケーションのモダン認証対応 (WIP)
+# アプリケーションのモダン認証対応 (WIP)
 ## 概要
 クラウド利用が主流の時代では、アプリケーションをどこからでも安全に利用できることが必須要件になり、Azure AD 等の IDaaS に認証連携し、条件付きアクセス等の高度なセキュリティ、運用・監査等のメリットを享受していくことが必要とされてきています。  
 このドキュメントは、特に Web アプリケーションを対象に、アプリケーションの認証のモダン化の方法を整理します。
@@ -54,29 +54,33 @@ Azure AD を ID プロバイダーとするアプリを、できるだけ改修�
 
 
 ### A-1 : Azure App Service の認証連携機能を利用する
-[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) を利用してアプリを PaaS 上で運用すると、シンプルな認証・認可であれば、最小限のコードで非常に簡単に実装することが可能です。[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) は、.NET、.NET Core、Java、Ruby、Node.js、PHP、Python　等の様々なプログラミング言語に対応しています。詳しくは、[Azure App Service での認証および認可](https://docs.microsoft.com/ja-jp/azure/app-service/overview-authentication-authorization) をご覧ください  
+[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) を利用してアプリを PaaS 上で運用すると、シンプルな認証・認可であれば、最小限のコードで非常に簡単に実装することが可能です。[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) は、.NET、.NET Core、Java、Ruby、Node.js、PHP、Python　等の様々なプログラミング言語に対応しています。詳しくは、[Azure App Service での認証および認可](https://docs.microsoft.com/ja-jp/azure/app-service/overview-authentication-authorization) をご参考ください。  
+配置場所が Azure になるため、「どこからでも利用できるアプリ」になります。  
 新しく作成する Web アプリケーションについてはもちろん、オンプレミス、または、IaaS のサーバー上で運用しているアプリケーションを移行することを検討することをお奨めしますが、その場合、一般的な PaaS 化の考慮点が適用されます。たとえば、永続的データをローカルディスクに保存するようなアーキテクチャのアプリであれば、抜本的にデータストアの変更が必要になります。詳しくは、[Azure アーキテクチャ センター](https://docs.microsoft.com/ja-jp/azure/architecture/) を参考ください。
 
 ### A-2 : Visual Studio の認証連携機能を利用する
 Visual Studio を利用してアプリ開発をする場合、シンプルな認証・認可の実装をほぼノンコーディングで実現可能です。実質的には、A-3 と同じく MSAL/ADAL などの認証ライブラリを利用することになりますが、IDE に統合され、設定レベルで実装可能です。詳しくは、[Visual Studio の接続済みサービスを利用して Azure Active Directory を追加する](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/vs-active-directory-add-connected-service) をご参考ください。
+「どこからでも利用できるアプリ」になるかは、配置場所によります。  
 
 ### A-3 : MSAL/ADAL 等の認証ライブラリを利用する
 もし、高度な認証・認可ロジックが必要、Visual Studio 意外の IDE を利用して開発するような場合には、MSAL/ADAL を認証ライブラリを利用して実装します。ADAL は、.NET、JavaScript、iOS、Android、Java、および Python をサポートしています。MSAL プレビューは、.NET、JavaScript、iOS、および Android をサポートしています。これらを利用したアプリパターンやプログラミング言語毎にサンプルコードも豊富に用意されているため、利用に際しての障壁は比較的低いはずです。詳しくは、[開発者向け Azure Active Directory](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/) をご参考ください。  
-また、その他のライブラリについても、[Certified Relying Party Servers and Services](https://openid.net/developers/certified/#RPLibs) をご参考ください。
+また、その他のライブラリについても、[Certified Relying Party Servers and Services](https://openid.net/developers/certified/#RPLibs) をご参考ください。  
+「どこからでも利用できるアプリ」になるかは、配置場所によります。  
 
 ### I-1 : ミドルウェアで対応する
 アプリのコード改修による費用対効果が見込めない場合には、工数が比較的低いミドルウェアレベルで対応できるか検討します。たとえば、Apache で利用できる [mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を利用することで、Apache サーバーを OpenID Connect の Relying Party とすることができます。ただし、認証プロトコルの変換だけで、インターネットからの社内配置アプリ利用、というシナリオの実現には、別途VPNや別なリバプロ等の仕組みが必要になります。     
 現時点では、IIS 用の対応モジュールはリリースされていませんが、マイクロソフトはその必要性や有用性を検討している段階です。  
+「どこからでも利用できるアプリ」になるかは、配置場所によります。  
 
 ### I-2 : リバースプロキシを利用する
 I-1 の応用編になりますが、[mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を実装した Apache サーバーをリバースプロキシとして動作させ、既存のアプリの前段に配置することで、アプリのコードを改修することなく、OpenID Connect の Relying Party とすることが可能です。複数のアプリサーバーを対象にしたい場合に効果的です。また、この方式だと IIS やその他のミドルウェアにも対応可能です。
 クライアントからアプリサーバーへは必ずリバプロ経由でアクセスするよう、ネットワークまわりの再設計を伴います。  
-このリバプロの役割は、認証プロトコルの変換だけで、インターネットからの社内配置アプリ利用、というシナリオの実現には、別途VPNや別なリバプロ等の仕組みが必要になります。   
+このリバプロの役割は、認証プロトコルの変換だけで、「どこからでも利用できるアプリ」にするには、別途VPNや別なリバプロ等の仕組みが必要になります。   
 [OpenID ファウンデーションジャパンの Enterprise Idenity Wokring Group が公開しているドキュメント](https://eiwg.openid.or.jp/phase3/samples/implementation/mod_auth_openidc) をご参考ください。
 
 ### I-3 : Azure AD Application Proxy を利用する
 I-2 の応用編になりますが、リバースプロキシとして [Azure AD Application Proxy](https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/application-proxy) を利用します。複数のアプリサーバーを対象にしたい場合に効果的です。  
-I-2 と大きく異なる点は、認証プロトコルの変換だけでなく、同時にインターネットからの社内配置アプリ利用、というシナリオも実現します。  
+I-2 と大きく異なる点は、認証プロトコルの変換だけでなく、同時に「どこからでも利用できるアプリ」になります。  
 クライアントからアプリサーバーへは必ずリバプロ経由でアクセスするよう、ネットワークまわりの再設計を伴います。  
 クライアントの場所にかかわらず、全てのトラフィックは Azure AD 経由、つまりインターネット経由になります。もし、社内ネットワークに存在するクライアントからのアクセスをインターネット経由にしたくない場合には、認証プロトコル変換を I-2 の方式で実現、インターネットからのアプリ利用というシナリオを Azure AD Application Proxy を使って実現します。  
 オンプレミス環境に、コネクタサーバーを配置するなど、[Azure AD Application Proxy を利用するための準備](https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/application-proxy-add-on-premises-application) が必要になります。
