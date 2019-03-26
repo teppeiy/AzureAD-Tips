@@ -1,6 +1,6 @@
 # Web アプリケーションのモダン認証対応 (WIP)
 ## 概要
-オンプレミスの時代から、クラウド利用が当たり前の自体になってきています。アプリケーションもどこからでも安全に利用できることが必須要件になりつつあり、Azure AD 等の IDaaS に認証連携し、様々なセキュリティや運用のメリットを享受するために認証もモダン化していくことを進めているかと思います。  
+クラウド利用が主流の時代では、アプリケーションをどこからでも安全に利用できることが必須要件になり、Azure AD 等の IDaaS に認証連携し、様々なセキュリティや運用のメリットを享受していくことが必要とされてきています。  
 このドキュメントは、Web アプリケーションを対象に、アプリケーションの認証のモダン化の方法を整理します。iOS/Android/Windows にインストールするタイプのネイティブアプリケーションは対象にしません。
 
 ## モダン認証方式の定義
@@ -8,65 +8,71 @@
 * [Open ID Connect (+OAuth2)](https://www.openid.or.jp/document/index.html)
 * SAML-P
 
-逆に言うと、以下がモダン認証方式ではない方式の代表例です。このドキュメントでは、「オンプレミス認証方式」と呼びます。
+一方、以下がモダン認証方式ではない方式の代表例です。このドキュメントでは、「オンプレミス認証方式」と呼びます。
 * 統合 Windows 認証 (Kerberos、NTLM)
 * LDAP 認証
 * ヘッダー認証
 
 ## 推奨事項
-Azure AD を ID プロバイダー とするアプリケーションを、できるだけコードを書かずに実装する、という観点での推奨を「新規に実装するアプリ」、「既存のアプリを」という2つの観点で考慮すべき順番を記載します。
+Azure AD を ID プロバイダーとするアプリを、できるだけ改修コストを抑えて実装する、という観点での推奨を「新規に実装するアプリ」、「既存のアプリを移行する」という2つの観点で考慮すべき順番を記載します。  
 
-オンプレミス認証方式 → モダン認証方式
+まず、新規に実装するアプリ等、利用する認証プロトコルが選択できる場合には、OpenID Connect を先に検討すべきです。これは、SAML-P よりもライブラリが豊富で実装の容易性、利用シナリオの幅が広い (ネイティブアプリにも適している等)、構成・トラブルシューティングの容易性、といった理由が挙げられます。
 
-新規アプリ
-1. Azure App Service を利用する
-2. MSAL、ADAL 等の認証ライブラリを利用して実装
-3. ｘｘｘ
+新規アプリをモダン認証方式に対応する際、考慮すべき順番  
+1. Azure App Service 上で動作する PaaS アプリとして実装する
+2. Visual Studio を利用して実装する
+3. MSAL/ADAL を利用して実装する
 
-既存のアプリ
-1. Azure App Service を利用する
-2. ミドルウェアレベルで対応
-3. MSAL、ADAL 等の認証ライブラリを利用して認証
-4. Azure AD Application Proxy を利用する
+既存のアプリをモダン認証方式に変更する際、考慮すべき順番
+1. Azure App Service 上へ移行する
+2. Visual Studio で認証設定を注入する
+3. ミドルウェアレベルで対応する
+4. MSAL/ADAL を利用して実装する
+5. Azure AD Application Proxy を利用する
 
-## 対応方法
-既存の「オンプレミス認証方式」アプリケーションを「モダン認証方式」へ移行し、Azure AD と認証連携する、という観点で対応方法を整理します。大きく分類すると、**アプリケーションのコード改修で対応する方法**と、**インフラ側で対応する方法**の2パターンがあります。
+## 対応方法サマリー
+既存の「オンプレミス認証方式」アプリを「モダン認証方式」へ移行し、Azure AD と認証連携する、という観点で対応方法を整理します。大きく分類すると、**アプリのコード改修で対応する方法**と、**インフラ側で対応する方法**の2パターンがあります。
 
 #### アプリコード改修で対応
 | # | 移行方法  | コード改修工数 | コメント |
 |---|---|---|---|
-| A-1 | Azure App Service へ移行して PaaS 化 | 小～大 | 認証対応は、ほぼノンコーディングで実現可能。データをローカルディスク等に保存するアプリだとPaaS化改修が高くなる等、一般的な PaaS 化 の考慮点が適用される。 |
-| A-2 | Visual Studio で認証設定を注入 | 小～大 | 既存アプリが VS で作成されている場合には非常に有効な方法で、シンプルな認証ロジックであれば、ほぼノンコーディングで実現可能。複雑な認可ロジックを実装している場合には要コード修正部分が多くなりがち。 |
-| A-3 | MSAL/ADAL を組み込んでコード改修 | 中～大 | VS で作成されてないアプリケーションに対し、認証ライブラリを使って組み込む。シンプルな認証ロジックであれば、比較的少ないコード量で実現可能。複雑な認可ロジックを実装している場合には要コード修正部分が多くなりがち。 |
+| A-1 | Azure App Service へ移行して PaaS 化 | 小～大 | シンプルな認証対応は、ほぼノンコーディングで実現可能。データをローカルディスク等に保存するアプリだとPaaS化改修が高くなる等、一般的な PaaS 化 の考慮点が適用される。 |
+| A-2 | Visual Studio で認証設定を注入 | 小～大 | 既存アプリが VS で作成されている場合には非常に有効で、シンプルな認証ロジックであれば、ほぼノンコーディングで実現可能。複雑な認可ロジックを実装している場合には要コード修正部分が多くなりがち。 |
+| A-3 | MSAL/ADAL を組み込んでコード改修 | 中～大 | VS で作成されてないアプリに対し、認証ライブラリを使って組み込む。シンプルな認証ロジックであれば、比較的少ないコード量で実現可能。複雑な認可ロジックを実装している場合には要コード修正部分が多くなりがち。 |
 | A-4 | 自ら OIDC/SAML を実装してコード改修 | 大 | 整理のために記載するが、実質的にこの方法を選択することは無い。 |
 
 #### インフラで対応（アプリコード改修は不要）
 | # | 移行方法  | インフラ構成対応工数 | コメント |
 |---|---|---|---|
-| I-1 | ミドルウェアで対応 | 中～大 | 対応モジュールのある Apache にて利用可能 |
-| I-2 | リバプロで対応 | 中～大 | 対応モジュールのある Apache にて利用可能 |
-| I-3 | Azure AD Application Proxy を利用 | 小～中 | AppProxy用のコネクタサーバー等のインフラを用意 |
+| I-1 | ミドルウェアで対応 | 小～中 | 対応モジュールのある Apache にて利用可能。IIS 用のモジュールは存在しない。 |
+| I-2 | リバプロで対応 | 中～大 | アプリサーバーの前段にリバプロを配置して認証を仲介。多くのアプリサーバーがある場合に効果的。 |
+| I-3 | Azure AD Application Proxy を利用 | 小～中 | I-2 と同じ考え方で、リバプロとして AppProxy を利用する。AppProxy 用のコネクタサーバーの用意が必要。 |
 
 
-### 方法１：Azure App Service を利用する
-[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) を利用してアプリケーションそのものを PaaS 上で運用すると、Azure AD 認証対応も最小限のコードで非常に簡単に実装することが可能です。[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) は、.NET、.NET Core、Java、Ruby、Node.js、PHP、Python　等の様々なプログラミング言語に対応しています。詳しくは、[Azure App Service での認証および認可](https://docs.microsoft.com/ja-jp/azure/app-service/overview-authentication-authorization) をご覧ください  
-新しく作成する Web アプリケーションについてはもちろん、オンプレミス、または、IaaS のサーバー上で運用しているアプリケーションを移行することも検討することをお奨めします。
+### A-1 : Azure App Service の認証連携機能を利用する
+[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) を利用してアプリを PaaS 上で運用すると、シンプルな認証・認可であれば、最小限のコードで非常に簡単に実装することが可能です。[Azure App Service](https://docs.microsoft.com/ja-jp/azure/app-service/overview) は、.NET、.NET Core、Java、Ruby、Node.js、PHP、Python　等の様々なプログラミング言語に対応しています。詳しくは、[Azure App Service での認証および認可](https://docs.microsoft.com/ja-jp/azure/app-service/overview-authentication-authorization) をご覧ください  
+新しく作成する Web アプリケーションについてはもちろん、オンプレミス、または、IaaS のサーバー上で運用しているアプリケーションを移行することも検討することをお奨めしますが、その場合、一般的な PaaS 化の考慮点が適用されます。たとえば、永続的データをローカルディスクに保存するようなアーキテクチャのアプリであれば、抜本的にデータストアの変更が必要になります。詳しくは、[Azure アーキテクチャ センター](https://docs.microsoft.com/ja-jp/azure/architecture/) を参考ください。
 
+### A-2 : Visual Studio の認証連携機能を利用する
+Visual Studio を利用してアプリ開発をする場合、シンプルな認証・認可の実装をほぼノンコーディングで実現可能です。実質的には、A-3 と同じく MSAL/ADAL などの認証ライブラリを利用することになりますが、IDE に統合され、設定レベルで実装可能です。詳しくは、[Visual Studio の接続済みサービスを利用して Azure Active Directory を追加する](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/vs-active-directory-add-connected-service) をご参考ください。
 
-### 方法２：ミドルウェアレベルで対応
-アプリケーション改修による費用対効果が見込めない場合には、改修工数が比較的低いミドルウェアレベルで対応できるか検討します。たとえば、Apache で利用できる [mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を利用することで、その Apache サーバーを OpenID Connect の Relying Party とすることができます。  
+### A-3 : MSAL/ADAL 等の認証ライブラリを利用する
+もし、高度な認証・認可ロジックが必要、Visual Studio 意外の IDE を利用して開発するような場合には、MSAL/ADAL を認証ライブラリを利用して実装します。ADAL は、.NET、JavaScript、iOS、Android、Java、および Python をサポートしています。MSAL プレビューは、.NET、JavaScript、iOS、および Android をサポートしています。これらを利用したアプリパターンやプログラミング言語毎にサンプルコードも豊富に用意されているため、利用に際しての障壁は比較的低いはずです。詳しくは、[開発者向け Azure Active Directory](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/) をご参考ください。  
+また、その他のライブラリについても、[Certified Relying Party Servers and Services](https://openid.net/developers/certified/#RPLibs) をご参考ください。
 
+### I-1 : ミドルウェアレベルで対応
+アプリのコード改修による費用対効果が見込めない場合には、工数が比較的低いミドルウェアレベルで対応できるか検討します。たとえば、Apache で利用できる [mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を利用することで、Apache サーバーを OpenID Connect の Relying Party とすることができます。  
+現時点では、IIS 用の対応モジュールはリリースされていませんが、マイクロソフトはその必要性や有用性を検討している段階です。  
 
-https://openid.net/developers/certified/
+### I-2 : リバースプロキシを利用する
+I-1 の応用編になりますが、[mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を実装した Apache サーバーをリバースプロキシとして動作させ、既存のアプリの前段に配置することで、アプリのコードを改修することなく、OpenID Connect の Relying Party とすることが可能です。複数のアプリサーバーを対象にしたい場合に効果的です。また、この方式だと IIS やその他のミドルウェアにも対応可能です。
+クライアントからアプリサーバーへは必ずリバプロ経由でアクセスするよう、ネットワークまわりの再設計を伴います。  
+このリバプロの役割は、認証プロトコルの変換だけで、インターネットからの社内配置アプリ利用、というシナリオの実現には、別途VPNや別なリバプロ等の仕組みが必要になります。   
+[OpenID ファウンデーションジャパンの Enterprise Idenity Wokring Group が公開しているドキュメント](https://eiwg.openid.or.jp/phase3/samples/implementation/mod_auth_openidc) をご参考ください。
 
-### 方法３：リバースプロキシを利用する
-方法２の応用編になりますが、[mod_auth_openidc](https://github.com/zmartzone/mod_auth_openidc) を実装した Apache サーバーをリバースプロキシとして動作させ、既存の Webアプリケーションの前段に配置することで、既存の Web アプリケーションをほぼ改修することなく、OpenID Connect の Relying Party とすることが可能です。  
-[OpenID ファウンデーションジャパンの Enterprise Idenity Wokring Group の公開しているドキュメント](https://eiwg.openid.or.jp/phase3/samples/implementation/mod_auth_openidc) をご参考ください。
-
-### 方法４：Azure AD Application Proxy を利用する
-方法３の応用編になりますが、リバースプロキシとして [Azure AD Application Proxy](https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/application-proxy) を利用します。
-
-
-
-### 参考情報
-Azure AD 連携するアプリ開発についてのドキュメント、クイックスタート、サンプルコードについては、[開発者向け Azure Active Directory](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/) をご覧ください。
+### I-3 : Azure AD Application Proxy を利用する
+I-2 の応用編になりますが、リバースプロキシとして [Azure AD Application Proxy](https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/application-proxy) を利用します。複数のアプリサーバーを対象にしたい場合に効果的です。  
+I-2 と大きく異なる点は、認証プロトコルの変換だけでなく、同時にインターネットからの社内配置アプリ利用、というシナリオも実現します。  
+クライアントからアプリサーバーへは必ずリバプロ経由でアクセスするよう、ネットワークまわりの再設計を伴います。  
+クライアントの場所にかかわらず、全てのトラフィックは Azure AD 経由、つまりインターネット経由になります。もし、社内ネットワークに存在するクライアントからのアクセスをインターネット経由にしたくない場合には、認証プロトコル変換を I-2 の方式で実現、インターネットからのアプリ利用というシナリオを Azure AD Application Proxy を使って実現します。  
+オンプレミス環境に、コネクタサーバーを配置するなど、[Azure AD Application Proxy を利用するための準備](https://docs.microsoft.com/ja-jp/azure/active-directory/manage-apps/application-proxy-add-on-premises-application) が必要になります。
