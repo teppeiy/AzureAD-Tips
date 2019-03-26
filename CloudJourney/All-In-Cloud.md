@@ -93,4 +93,4 @@ https://docs.microsoft.com/ja-jp/azure/active-directory/devices/overview) をご
   * 戦略領域である自社開発・運用のアプリケーションについては、改修ライフサイクルに応じてモダン認証に対応を進め、Azure AD と認証連携します。モダン認証対応については、[アプリケーションのモダン認証対応方法](MA-Apps.md) をご覧ください。
 * 新規・既存アプリケーション共通
   * モダン認証対応については、[アプリケーションのモダン認証対応方法](MA-Apps.md) をご覧ください。
-  * モダン認証に対応できないパッケージ製品、LDAP 等の古いプロトコルにたよざるをえないものについては、Domain Controller as a Service である、[Azure AD Domain Services](https://docs.microsoft.com/ja-jp/azure/active-directory-domain-services/active-directory-ds-overview) との連携を検討します。
+  * モダン認証に対応できないパッケージ製品、LDAP 等の古いプロトコルにたよざるをえないものについては、Domain Controller as a Service である、[Azure AD Domain Services](https://docs.microsoft.com/ja-jp/azure/active-directory-domain-services/active-directory-ds-overview) との連携を検討します。これを利用してアプリの依存先を Azure AD DS へ変更することで、既存のオンプレ AD への依存を無くすことが可能です。
