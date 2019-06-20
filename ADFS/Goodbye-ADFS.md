@@ -5,7 +5,8 @@
 
 * ### **世界トップクラスのセキュリティのメリットを享受**  
   AD FS に対する攻撃対策は、それを運用している企業の責任範囲ですが、それをマイクロソフトへ任せることで、インテリジェントなセキュリティ対策のメリットを享受することができます。AD FS を運用すると企業ネットワーク（実際にはDMZ）への受信ポート 443 を開放することになり、日々進化するあらゆる攻撃への対策は非常に困難でコストもかかります。  
-  AD FS を無くすことで、アタックサーフェスもなくなり、また、Azure AD の基本機能である [Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout) を利用することになり、パスワードスプレー等の様々な攻撃から自動的に防御されます。
+  AD FS を無くすことで、アタックサーフェスもなくなり、また、Azure AD の基本機能である [Smart Lockout](https://docs.microsoft.com/ja-jp/azure/active-directory/authentication/howto-password-smart-lockout) を利用することになり、パスワードスプレー等の様々な攻撃から自動的に防御されます。  
+  セキュリティが向上することから、英国政府のサイバーセキュリティ機関である [National Cyber Security Centre](https://www.ncsc.gov.uk/) も AD FS よりも PHS 等のクラウド認証に切り替えることを推奨しています。詳しくは、 [Securing Office 365 with better configuration](https://www.ncsc.gov.uk/blog-post/securing-office-365-with-better-configuration) をご覧ください。  
 * ### [**条件付きアクセス**](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-conditional-access-azure-portal)**で、より高度できめ細かなアクセス制御を実現**  
   複雑な構文を要する AD FS のクレームルールを管理することは手間がかかりますし、変更管理やテストにかかる労力や変更適用までの時間は小さくありません。条件付きアクセスを利用することで、GUI を使った形でのアクセスポリシーを管理できます。また、AD FS では単一アプリケーションとして扱わざるを得なかった Office 365 アプリケーションですが、条件付きアクセスでは各アプリケーション毎に独立したルールを定義することが可能です。
 * ### **オンプレミス環境の管理から解放**  
@@ -29,6 +30,7 @@
 パスワードハッシュ同期は、AD FS を無くすためのステップの一つですが、2つの大きなメリットがあります。
 1. [漏洩した資格情報検知レポート](https://docs.microsoft.com/ja-jp/azure/active-directory/active-directory-identityprotection#users-flagged-for-risk) によるセキュリティ向上  
 マイクロソフトは、複数のソースから漏洩した資格情報一覧を継続的に取得しています。そのリストと Azure AD 利用者のアカウントを機械的に突き合わせることにより、漏洩した資格情報を検知しレポートを提供します。企業の管理者は、漏洩しているアカウントを知ることができ、被害を拡大させないような対策（パスワードをリセットする等）を実施できます。
+
 2. ディザスタリカバリの対策  
 フェデレーション環境において、AD FS/WAP が利用できなくなった際には、Office 365 等 Azure AD に認証を依存しているサービスが利用できなくなります。実際に AD FS が Pety aに感染した企業において、パスワードハッシュ同期をしていた企業は AD FS から Azure AD への認証に切り替えることによって、数時間のダウンタイムでサービスへの認証アクセスが復旧できました。一方、パスワードハッシュ同期をしていなかったため、AD FS を構築しなおす等の作業で、数日間のダウンタイムを強いられた企業もあります。
 
