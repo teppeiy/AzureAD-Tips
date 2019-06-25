@@ -13,7 +13,11 @@
   AD FSを利用する場合、冗長性や災害対策を考慮すると最低 8 台（(AD FS 2 台 + WAP 2 台)* 2 サイト）また、テスト・QA 環境も含めると更に多くのサーバーの管理が必要です。加えて、各種証明書の管理、DMZ を含む外部からのアクセスセキュリティの管理、ロードバランサーの管理、セキュリティ更新プログラムの管理等、比較的大きなコストと労力が必要ですが、これらから開放されます。
 
 参考：メリットや事例についてはこちらのビデオもご覧ください  
-[【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://www.youtube.com/watch?v=g2mB_EKqi-g)
+[【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://www.youtube.com/watch?v=g2mB_EKqi-g)  
+
+[【de:code 2019】SE03 Good Bye AD FS​ Azure Active Directory Only の認証方式へ切り替えよう!​](https://youtu.be/o_MCm_0n2Jo)  
+
+[【TechSummit 2018】 CI12 | 開発部門が手掛けた Azure AD B2B 大規模展開 in Japan ～表面化した課題とそれらを解決する新機能・ロードマップ～](https://youtu.be/pHs0eQaicM4)  
 
 ## AD FS 廃止までのステップ
 1. 準備  
