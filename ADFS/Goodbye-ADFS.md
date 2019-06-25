@@ -15,7 +15,8 @@
 参考：メリットや事例についてはこちらのビデオもご覧ください  
 [【de:code 2018】CI03 AD FS では守れない？！アカウント乗っ取りを防ぐためにすべき 3 つのこと ～ユーザー企業の実例のご紹介～](https://www.youtube.com/watch?v=g2mB_EKqi-g)  
 
-[【de:code 2019】SE03 Good Bye AD FS​ Azure Active Directory Only の認証方式へ切り替えよう!​](https://youtu.be/o_MCm_0n2Jo)  
+[【de:code 2019】SE03 Good Bye AD FS​ Azure Active Directory Only の認証方式へ切り替えよう!​](https://youtu.be/o_MCm_0n2Jo)   [プレゼン資料](http://aka.ms/GoodbyeAdfsPpt)
+
 
 [【TechSummit 2018】 CI12 | 開発部門が手掛けた Azure AD B2B 大規模展開 in Japan ～表面化した課題とそれらを解決する新機能・ロードマップ～](https://youtu.be/pHs0eQaicM4)  
 
