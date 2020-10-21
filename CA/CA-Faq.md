@@ -28,6 +28,11 @@ Salesforce には、証明書ベースの認証を有効にするという設定
 * デバイスは準拠しているとしてマーク済みである必要があります
 * ドメイン参加済みであることが必要 (ハイブリッド Azure AD) 
 
+上記を含む一般的なモバイルアプリケーション開発の推奨事項はこちらを参照してください
+
+[Support single sign-on and app protection policies in mobile apps you develop](https://docs.microsoft.com/ja-jp/azure/active-directory/develop/mobile-sso-support-overview)
+
+<br>
 
 ### Q2. Intuneへの登録が失敗します
 条件付きアクセスで、**全て**のクラウドアプリへのアクセスを**ブロック**、というポリシーが適用されている場合、Intuneへの登録が失敗します。
